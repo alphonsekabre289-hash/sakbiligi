@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande confirmée !</title>
+  <meta name="description" content="Confirmation de votre commande - Merci pour votre achat." />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary-blue: #2563EB;
+      --primary-blue-hover: #1D4ED8;
+      --bg-page: #F0F6FF;
+      --bg-card: #FFFFFF;
+      --border-card: #E2E8F0;
+      --border-light: #EFF6FF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-subtle: #475569;
+      --success-green: #16A34A;
+      --success-bg: #DCFCE7;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================================
+       MAIN CONFIRMATION CONTENT
+       ======================================================== */
+    .confirmation-main {
+      flex: 1;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .confirmation-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Success Header (Icon, Title, Subtitle) */
+    .success-hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .success-check-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background-color: var(--success-bg);
+      color: var(--success-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.35rem;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .success-subtitle {
+      font-size: 1rem;
+      color: var(--text-subtle);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ========================================================
+       ORDER DETAIL CARDS (Matches Images 2 & 3 Exactly)
+       ======================================================== */
+    .order-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.45rem 1.65rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    /* Card 1: Order ID and Date */
+    .order-meta-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .meta-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .meta-col.right {
+      text-align: right;
+    }
+
+    .meta-label {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .order-id-val {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .order-date-val {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Card 2: Order Status */
+    .card-section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 1.25rem;
+    }
+
+    .card-section-title svg {
+      color: #1E293B;
+    }
+
+    .status-two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .status-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .status-label {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .status-val {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    /* Card 3: Ordered Items */
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 1.25rem;
+    }
+
+    .item-main-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .item-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .item-qty {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .item-price {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .order-divider {
+      height: 1px;
+      background-color: #F1F5F9;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .order-divider-bold {
+      height: 1px;
+      background-color: #E2E8F0;
+      margin: 1rem 0;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.65rem;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      padding-top: 0.25rem;
+    }
+
+    .total-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    /* Card 4: Customer & Delivery Information */
+    .customer-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .cust-info-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cust-info-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .cust-info-val {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* ========================================================
+       ACTION BUTTONS (WhatsApp, Continue Shopping, Print)
+       ======================================================== */
+    .action-buttons-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1.85rem;
+    }
+
+    .btn-whatsapp-follow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background-color: #22C55E;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 0.95rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-whatsapp-follow:hover {
+      background-color: #16A34A;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-print-receipt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: #FFFFFF;
+      color: var(--text-main);
+      border: 1px solid var(--border-card);
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+
+    .btn-print-receipt:hover {
+      background-color: #F8FAFC;
+      border-color: #CBD5E1;
+    }
+
+    /* Print styles */
+    @media print {
+      .action-buttons-group {
+        display: none !important;
+      }
+      body {
+        background-color: #FFFFFF !important;
+      }
+      .confirmation-main {
+        padding: 0 !important;
+      }
+      .order-card {
+        box-shadow: none !important;
+        border: 1px solid #CBD5E1 !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      .secondary-actions-row {
+        grid-template-columns: 1fr;
+      }
+      .status-two-col-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .customer-info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Confirmation Body -->
+  <main class="confirmation-main">
+    <div class="confirmation-container">
+
+      <!-- Success Checkmark, Title & Subtitle (Image 2) -->
+      <section class="success-hero">
+        <div class="success-check-circle">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h1 class="success-title">Commande confirmée !</h1>
+        <p class="success-subtitle">
+          Merci pour votre commande. Nous vous enverrons une confirmation bientôt.
+        </p>
+      </section>
+
+      <!-- Card 1: N° de commande & Date (Image 2) -->
+      <section class="order-card order-meta-card">
+        <div class="meta-col">
+          <span class="meta-label">N° de commande</span>
+          <span class="order-id-val" id="order-number-val">#1001</span>
+        </div>
+        <div class="meta-col right">
+          <span class="meta-label">Date de commande</span>
+          <span class="order-date-val" id="order-date-val">22 octobre 2026</span>
+        </div>
+      </section>
+
+      <!-- Card 2: Statut de la commande (Image 3) -->
+      <section class="order-card">
+        <div class="card-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Statut de la commande
+        </div>
+        <div class="status-two-col-grid">
+          <div class="status-col">
+            <span class="status-label">Traitement</span>
+            <span class="status-val" id="order-status-traitement">Pending</span>
+          </div>
+          <div class="status-col">
+            <span class="status-label">Paiement</span>
+            <span class="status-val" id="order-status-paiement">Unpaid</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Card 3: Articles commandés (Image 3) -->
+      <section class="order-card">
+        <div class="card-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Articles commandés
+        </div>
+
+        <!-- Product row -->
+        <div class="order-item-row">
+          <div class="item-main-info">
+            <span class="item-title" id="order-product-title">Montre Connectée Tactique T-Rex</span>
+            <span class="item-qty" id="order-product-qty">Quantité: 1</span>
+          </div>
+          <span class="item-price" id="order-product-price">0 F CFA</span>
+        </div>
+
+        <div class="order-divider"></div>
+
+        <!-- Breakdown lines -->
+        <div class="breakdown-row">
+          <span>Sous-total</span>
+          <span id="order-subtotal">0 F CFA</span>
+        </div>
+        <div class="breakdown-row">
+          <span>Frais de livraison</span>
+          <span id="order-shipping">0 F CFA</span>
+        </div>
+
+        <div class="order-divider-bold"></div>
+
+        <!-- Total line -->
+        <div class="total-row">
+          <span>Total</span>
+          <span class="total-val" id="order-total-val">0 F CFA</span>
+        </div>
+      </section>
+
+      <!-- Card 4: Coordonnées de livraison du client -->
+      <section class="order-card" id="customer-info-card" style="display:none;">
+        <div class="card-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Adresse et coordonnées de livraison
+        </div>
+        <div class="customer-info-grid">
+          <div class="cust-info-block">
+            <span class="cust-info-label">Destinataire</span>
+            <span class="cust-info-val" id="info-client-name">-</span>
+          </div>
+          <div class="cust-info-block">
+            <span class="cust-info-label">Numéro de téléphone</span>
+            <span class="cust-info-val" id="info-client-phone">-</span>
+          </div>
+          <div class="cust-info-block">
+            <span class="cust-info-label">Ville de livraison</span>
+            <span class="cust-info-val" id="info-client-city">-</span>
+          </div>
+          <div class="cust-info-block">
+            <span class="cust-info-label">Instructions / Notes</span>
+            <span class="cust-info-val" id="info-client-notes">Aucune</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="action-buttons-group">
+        <a id="btn-whatsapp-link" href="https://wa.me/" target="_blank" class="btn-whatsapp-follow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Suivre ma commande sur WhatsApp
+        </a>
+
+        <button type="button" class="btn-print-receipt" onclick="window.print()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Imprimer le reçu
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Déclenchement de confettis festifs
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+
+      // 2. Récupérer les paramètres d'URL s'ils existent
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlOrder = urlParams.get('order');
+
+      // 3. Récupérer la dernière commande passée depuis localStorage
+      let orderData = null;
+      try {
+        const storedOrder = localStorage.getItem('sakbi_latest_order');
+        if (storedOrder) {
+          orderData = JSON.parse(storedOrder);
+        }
+      } catch(e) {}
+
+      // 4. Si pas de commande en mémoire ni dans l'URL, afficher les données par défaut exactes des captures d'écran de l'utilisateur
+      const defaultOrder = {
+        id: '1001',
+        date: '22 octobre 2026',
+        product: 'Montre Connectée Tactique T-Rex',
+        qty: 1,
+        priceFormatted: '0 F CFA',
+        subtotalFormatted: '0 F CFA',
+        shippingFormatted: '0 F CFA',
+        totalFormatted: '0 F CFA',
+        statusTraitement: 'Pending',
+        statusPaiement: 'Unpaid',
+        customer: '',
+        phone: '',
+        city: '',
+        notes: ''
+      };
+
+      // Si l'utilisateur a passé une vraie commande
+      if (orderData && (!urlOrder || urlOrder === orderData.id || urlOrder.replace('#','') === orderData.id.replace('#',''))) {
+        const numId = orderData.id.startsWith('#') ? orderData.id : `#${orderData.id}`;
+        document.getElementById('order-number-val').textContent = numId;
+        
+        // Date formatée en français
+        const orderDate = orderData.fullDate || '22 octobre 2026';
+        document.getElementById('order-date-val').textContent = orderDate;
+
+        document.getElementById('order-status-traitement').textContent = orderData.statusTraitement || 'Pending';
+        document.getElementById('order-status-paiement').textContent = orderData.statusPaiement || 'Unpaid';
+
+        document.getElementById('order-product-title').textContent = orderData.product || 'Montre Connectée Tactique T-Rex';
+        document.getElementById('order-product-qty').textContent = `Quantité: ${orderData.qty || 1}`;
+
+        const priceStr = orderData.total ? `${Number(orderData.total).toLocaleString()} FCFA` : '0 F CFA';
+        document.getElementById('order-product-price').textContent = priceStr;
+        document.getElementById('order-subtotal').textContent = priceStr;
+        document.getElementById('order-shipping').textContent = '0 F CFA';
+        document.getElementById('order-total-val').textContent = priceStr;
+
+        // Afficher coordonnées client si présentes
+        if (orderData.customer || orderData.phone || orderData.city) {
+          document.getElementById('customer-info-card').style.display = 'block';
+          if (orderData.customer) document.getElementById('info-client-name').textContent = orderData.customer;
+          if (orderData.phone) document.getElementById('info-client-phone').textContent = orderData.phone;
+          if (orderData.city) document.getElementById('info-client-city').textContent = orderData.city;
+          if (orderData.notes) document.getElementById('info-client-notes').textContent = orderData.notes;
+        }
+
+        // WhatsApp direct link
+        const waMsg = encodeURIComponent(
+          `Bonjour, je viens de passer la commande ${numId} sur votre boutique !\n\n` +
+          `📦 Article : ${orderData.product}\n` +
+          `🔢 Quantité : ${orderData.qty || 1}\n` +
+          `💰 Montant Total : ${priceStr}\n` +
+          `👤 Nom : ${orderData.customer || ''}\n` +
+          `📞 Téléphone : ${orderData.phone || ''}\n` +
+          `📍 Ville de livraison : ${orderData.city || ''}\n` +
+          (orderData.notes ? `📝 Notes : ${orderData.notes}\n` : '') +
+          `\nMerci de bien vouloir me confirmer la livraison !`
+        );
+        document.getElementById('btn-whatsapp-link').href = `https://wa.me/?text=${waMsg}`;
+
+      } else {
+        // Affichage des données du modèle de l'utilisateur (Images 2 & 3)
+        document.getElementById('order-number-val').textContent = '#1001';
+        document.getElementById('order-date-val').textContent = '22 octobre 2026';
+        document.getElementById('order-status-traitement').textContent = 'Pending';
+        document.getElementById('order-status-paiement').textContent = 'Unpaid';
+        document.getElementById('order-product-title').textContent = 'Montre Connectée Tactique T-Rex';
+        document.getElementById('order-product-qty').textContent = 'Quantité: 1';
+        document.getElementById('order-product-price').textContent = '0 F CFA';
+        document.getElementById('order-subtotal').textContent = '0 F CFA';
+        document.getElementById('order-shipping').textContent = '0 F CFA';
+        document.getElementById('order-total-val').textContent = '0 F CFA';
+      }
+
+      try {
+        const themeSaved = localStorage.getItem('sakbi_theme_config');
+        if (themeSaved) {
+          const cfg = JSON.parse(themeSaved);
+          if (cfg.primaryColor) {
+            document.documentElement.style.setProperty('--primary-blue', cfg.primaryColor);
+          }
+        }
+      } catch(e) {}
+    });
+  </script>
+</body>
+</html>

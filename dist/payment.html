@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logicom Pay • Paiement sécurisé</title>
+  <meta name="description" content="Plateforme de paiement sécurisée Logicom pour le renouvellement d'abonnement." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --bg-page: #F7F8FA;
+      --card-bg: #FFFFFF;
+      --border-color: #E5E7EB;
+      --border-focus: #111827;
+      --text-main: #111827;
+      --text-muted: #4B5563;
+      --text-light: #9CA3AF;
+      --primary-forest: #234635;
+      --accent-green: #16A34A;
+      --radius-box: 16px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2.5rem 1.25rem 4rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .payment-container {
+      width: 100%;
+      max-width: 490px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      padding: 1.85rem 1.85rem 2.25rem;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top Bar Selika */
+    .selika-top-bar {
+      background: #F1F4F9;
+      border-radius: 16px;
+      padding: 0.95rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease;
+    }
+
+    .selika-top-bar:hover {
+      background: #E8EDF5;
+    }
+
+    .selika-brand-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .selika-logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+
+    .selika-brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+
+    .selika-top-chevron {
+      color: #6B7280;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    /* Info récapitulative rétractable */
+    .order-summary-box {
+      background: #FAFBFD;
+      border: 1px dashed #D1D5DB;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      margin-top: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .order-summary-box strong {
+      color: #111827;
+      font-size: 1.05rem;
+    }
+
+    /* Section Pays */
+    .country-section {
+      margin-top: 1.5rem;
+    }
+
+    .field-label {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #4B5563;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .country-selector-box {
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      background: #FFFFFF;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+
+    .country-selector-box:hover {
+      border-color: #9CA3AF;
+    }
+
+    .country-selector-box:focus, .country-selector-box.active {
+      border-color: #111827;
+      box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.08);
+    }
+
+    .country-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .country-flag-wrap {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .country-name-text {
+      font-size: 1.02rem;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .country-chevron {
+      color: #6B7280;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Modal / Popover choix du pays */
+    .country-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      z-index: 50;
+      max-height: 260px;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+
+    .country-dropdown-menu.show {
+      display: block;
+    }
+
+    .country-option-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .country-option-item:hover {
+      background: #F3F4F6;
+    }
+
+    /* Section Méthodes de paiement */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 1.85rem;
+      margin-bottom: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+
+    .methods-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .method-card {
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      background: #FFFFFF;
+      padding: 1.05rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+      user-select: none;
+    }
+
+    .method-card:hover {
+      border-color: #111827;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .method-card:active {
+      transform: translateY(0);
+    }
+
+    .method-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .method-icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .method-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+
+    .method-arrow {
+      color: #9CA3AF;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Crypto Specific */
+    .crypto-icons-stack {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 54px;
+      height: 34px;
+    }
+
+    .crypto-mini-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .crypto-mini-badge.usdt { left: 0; background: #26A17B; z-index: 3; }
+    .crypto-mini-badge.eth { left: 14px; background: #627EEA; z-index: 2; }
+    .crypto-mini-badge.btc { left: 28px; background: #F7931A; z-index: 1; }
+
+    .crypto-right-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #9CA3AF;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    /* Crypto Options Dropdown */
+    .crypto-options-container {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: -0.25rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1.25rem;
+      border-left: 2px dashed #E5E7EB;
+      margin-left: 1.5rem;
+    }
+
+    .crypto-options-container.show {
+      display: flex;
+    }
+
+    .crypto-sub-card {
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      background: #FAFBFD;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .crypto-sub-card:hover {
+      background: #FFFFFF;
+      border-color: #111827;
+    }
+
+    /* Back link */
+    .back-footer-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 1.85rem;
+      color: #6B7280;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .back-footer-link:hover {
+      color: #111827;
+      text-decoration: underline;
+    }
+
+    /* MODAL DE PAIEMENT INTERACTIF */
+    .payment-modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    .payment-modal-backdrop.open {
+      display: flex;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .payment-modal-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 440px;
+      padding: 2rem 1.85rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+      position: relative;
+      animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(20px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: #F3F4F6;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4B5563;
+      transition: all 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      background: #E5E7EB;
+      color: #111827;
+    }
+
+    .modal-header-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-method-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .modal-method-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-amount-tag {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #234635;
+      margin-top: 0.35rem;
+    }
+
+    .modal-input-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4B5563;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .modal-text-input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: var(--font-main);
+      color: #111827;
+      background: #FAF9F5;
+      outline: none;
+      transition: all 0.15s;
+    }
+
+    .modal-text-input:focus {
+      background: #FFFFFF;
+      border-color: #234635;
+      box-shadow: 0 0 0 3px rgba(35, 70, 53, 0.1);
+    }
+
+    .modal-hint-box {
+      background: #F8FAF9;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.86rem;
+      color: #475569;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .btn-confirm-pay {
+      width: 100%;
+      background: #234635;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 14px;
+      padding: 1rem 1.4rem;
+      font-family: var(--font-main);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(35, 70, 53, 0.25);
+    }
+
+    .btn-confirm-pay:hover {
+      background: #1B3629;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(35, 70, 53, 0.35);
+    }
+
+    .btn-confirm-pay:active {
+      transform: translateY(0);
+    }
+
+    /* Modal success state */
+    .success-content-wrap {
+      display: none;
+      text-align: center;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .success-icon-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #E8F8F0;
+      color: #16A34A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-container">
+    
+    <!-- En-tête Logicom Pay -->
+    <div class="selika-top-bar" id="selika-top-bar" onclick="toggleOrderSummary()" title="Logicom Pay">
+      <div class="selika-brand-left">
+        <img src="/logicom-logo.svg" alt="Logicom" class="logicom-payment-logo" style="height: 38px; width: auto; display: block;" />
+      </div>
+      <div class="selika-top-chevron" id="summary-chevron">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Récapitulatif de paiement -->
+    <div class="order-summary-box" id="order-summary-box" style="display: flex;">
+      <div>
+        <div style="font-weight: 600; color:#111827;">Forfait Boutique Pro (1 mois)</div>
+        <div style="font-size: 0.8rem; color:#6B7280;" id="summary-merchant-text">Boutique Logicom • Renouvellement</div>
+      </div>
+      <strong id="summary-price-text">15 000 FCFA</strong>
+    </div>
+
+    <!-- Sélecteur de pays -->
+    <div class="country-section">
+      <label class="field-label">Country</label>
+      <div class="country-selector-box" id="country-selector-box" tabindex="0" onclick="toggleCountryDropdown()">
+        <div class="country-left">
+          <div class="country-flag-wrap" id="selected-country-flag">
+            <!-- Drapeau Burkina Faso par défaut -->
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="36" height="18" fill="#EF3340" />
+              <rect y="18" width="36" height="18" fill="#009739" />
+              <polygon points="18,10.5 20.3,17.7 27.8,17.7 21.8,22.1 24.1,29.3 18,24.8 11.9,29.3 14.2,22.1 8.2,17.7 15.7,17.7" fill="#FCD116" />
+            </svg>
+          </div>
+          <span class="country-name-text" id="selected-country-name">Burkina Faso</span>
+        </div>
+        <div class="country-chevron">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <!-- Menu déroulant des pays -->
+        <div class="country-dropdown-menu" id="country-dropdown-menu">
+          <div class="country-option-item" onclick="selectCountry('BF', 'Burkina Faso', '+226', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="36" height="18" fill="#EF3340" />
+              <rect y="18" width="36" height="18" fill="#009739" />
+              <polygon points="18,10.5 20.3,17.7 27.8,17.7 21.8,22.1 24.1,29.3 18,24.8 11.9,29.3 14.2,22.1 8.2,17.7 15.7,17.7" fill="#FCD116" />
+            </svg>
+            <span>Burkina Faso (+226)</span>
+          </div>
+
+          <div class="country-option-item" onclick="selectCountry('CI', 'Côte d\'Ivoire', '+225', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="12" height="36" fill="#F77F00" />
+              <rect x="12" width="12" height="36" fill="#FFFFFF" />
+              <rect x="24" width="12" height="36" fill="#009E49" />
+            </svg>
+            <span>Côte d'Ivoire (+225)</span>
+          </div>
+
+          <div class="country-option-item" onclick="selectCountry('SN', 'Sénégal', '+221', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="12" height="36" fill="#00853F" />
+              <rect x="12" width="12" height="36" fill="#FDEF42" />
+              <rect x="24" width="12" height="36" fill="#E31B23" />
+              <polygon points="18,13 19.5,17.5 24,17.5 20.3,20.2 21.7,24.7 18,22 14.3,24.7 15.7,20.2 12,17.5 16.5,17.5" fill="#00853F" />
+            </svg>
+            <span>Sénégal (+221)</span>
+          </div>
+
+          <div class="country-option-item" onclick="selectCountry('ML', 'Mali', '+223', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="12" height="36" fill="#14B53A" />
+              <rect x="12" width="12" height="36" fill="#FCD116" />
+              <rect x="24" width="12" height="36" fill="#CE1126" />
+            </svg>
+            <span>Mali (+223)</span>
+          </div>
+
+          <div class="country-option-item" onclick="selectCountry('BJ', 'Bénin', '+229', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="14" height="36" fill="#008751" />
+              <rect x="14" width="22" height="18" fill="#FCD116" />
+              <rect x="14" y="18" width="22" height="18" fill="#E8112D" />
+            </svg>
+            <span>Bénin (+229)</span>
+          </div>
+
+          <div class="country-option-item" onclick="selectCountry('TG', 'Togo', '+228', event)">
+            <svg viewBox="0 0 36 36" width="24" height="24" style="border-radius:50%; flex-shrink:0;">
+              <rect width="36" height="36" fill="#006A4E" />
+              <rect y="7" width="36" height="7" fill="#FFCE00" />
+              <rect y="21" width="36" height="7" fill="#FFCE00" />
+              <rect width="16" height="16" fill="#D21034" />
+              <polygon points="8,3 9.5,7 13.5,7 10.3,9.5 11.5,13.5 8,11 4.5,13.5 5.7,9.5 2.5,7 6.5,7" fill="#FFFFFF" />
+            </svg>
+            <span>Togo (+228)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titre Sélection méthode -->
+    <h2 class="section-title">Select a payment method</h2>
+
+    <!-- Liste des 8 Méthodes conformes aux Captures d'écran 2 & 3 -->
+    <div class="methods-list">
+      
+      <!-- 1. Orange Money -->
+      <div class="method-card" onclick="openPaymentModal('Orange Money', 'orange-money', '#000000')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #000000;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M5 8L10 13L5 18" stroke="#FF6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 8L16 13L11 18" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="method-name">Orange Money</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 2. Wave -->
+      <div class="method-card" onclick="openPaymentModal('Wave', 'wave', '#1EC3F2')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #1EC3F2;">
+            <!-- Mascotte Manchot Wave -->
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="18" rx="8" ry="10" fill="#111827" />
+              <ellipse cx="16" cy="19" rx="5" ry="7" fill="#FFFFFF" />
+              <circle cx="14" cy="12" r="1.2" fill="#FFFFFF" />
+              <circle cx="18" cy="12" r="1.2" fill="#FFFFFF" />
+              <polygon points="15,14 17,14 16,16" fill="#FBBF24" />
+            </svg>
+          </div>
+          <span class="method-name">Wave</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 3. Moov Money -->
+      <div class="method-card" onclick="openPaymentModal('Moov Money', 'moov', '#FF6600')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #FF6600;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <circle cx="8" cy="12" r="4.5" fill="#FFFFFF" />
+              <circle cx="16" cy="12" r="4.5" fill="#002D72" />
+            </svg>
+          </div>
+          <span class="method-name">Moov Money</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 4. Telecel Money -->
+      <div class="method-card" onclick="openPaymentModal('Telecel Money', 'telecel', '#D71920')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #D71920;">
+            <span style="color:#FFFFFF; font-weight:800; font-size:1.35rem; font-family:sans-serif; line-height:1;">t</span>
+          </div>
+          <span class="method-name">Telecel Money</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 5. Coris Money -->
+      <div class="method-card" onclick="openPaymentModal('Coris Money', 'coris', '#00A3E0')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #00A3E0;">
+            <!-- Éclair/Vague Coris jaune -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L4 14H12L11 22L20 10H12L13 2Z" fill="#FFDE00"/>
+            </svg>
+          </div>
+          <span class="method-name">Coris Money</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 6. Sank Money -->
+      <div class="method-card" onclick="openPaymentModal('Sank Money', 'sank', '#D31821')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #D31821;">
+            <!-- Silhouette Afrique Sank Money -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4C14 4 16 6 16 8C17 9 17 11 16 12C15 14 14 17 13 19C12 20 11 20 10 18C9 16 8 13 8 11C8 9 9 7 10 5C11 4 11.5 4 12 4Z" fill="#FFFFFF"/>
+              <path d="M7 10L17 10" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="method-name">Sank Money</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 7. Card -->
+      <div class="method-card" onclick="openPaymentModal('Carte Bancaire', 'card', '#16A34A')">
+        <div class="method-left">
+          <div class="method-icon-circle" style="background: #16A34A;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="3"></rect>
+              <line x1="2" y1="10" x2="22" y2="10"></line>
+            </svg>
+          </div>
+          <span class="method-name">Card</span>
+        </div>
+        <div class="method-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 8. Crypto -->
+      <div class="method-card" onclick="toggleCryptoOptions()">
+        <div class="method-left">
+          <div class="crypto-icons-stack">
+            <!-- USDT -->
+            <div class="crypto-mini-badge usdt" title="Tether USDT">
+              <span style="color:#FFF; font-weight:800; font-size:0.75rem; font-family:sans-serif;">₮</span>
+            </div>
+            <!-- ETH -->
+            <div class="crypto-mini-badge eth" title="Ethereum">
+              <span style="color:#FFF; font-weight:700; font-size:0.75rem;">Ξ</span>
+            </div>
+            <!-- BTC -->
+            <div class="crypto-mini-badge btc" title="Bitcoin">
+              <span style="color:#FFF; font-weight:800; font-size:0.75rem;">₿</span>
+            </div>
+          </div>
+          <span class="method-name" style="margin-left: 0.6rem;">Crypto</span>
+        </div>
+        <div class="crypto-right-group">
+          <span>3</span>
+          <svg id="crypto-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s;">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Sous-options Crypto déroulantes -->
+      <div class="crypto-options-container" id="crypto-options-container">
+        <div class="crypto-sub-card" onclick="openPaymentModal('USDT (TRC20 / ERC20)', 'crypto-usdt', '#26A17B')">
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <span style="background:#26A17B; color:#FFF; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem;">₮</span>
+            <span style="font-weight:600; font-size:0.95rem;">Tether USDT</span>
+          </div>
+          <span style="font-size:0.85rem; color:#6B7280;">TRC20 & ERC20 ›</span>
+        </div>
+
+        <div class="crypto-sub-card" onclick="openPaymentModal('Bitcoin (BTC)', 'crypto-btc', '#F7931A')">
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <span style="background:#F7931A; color:#FFF; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem;">₿</span>
+            <span style="font-weight:600; font-size:0.95rem;">Bitcoin</span>
+          </div>
+          <span style="font-size:0.85rem; color:#6B7280;">Réseau BTC ›</span>
+        </div>
+
+        <div class="crypto-sub-card" onclick="openPaymentModal('Ethereum (ETH)', 'crypto-eth', '#627EEA')">
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <span style="background:#627EEA; color:#FFF; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem;">Ξ</span>
+            <span style="font-weight:600; font-size:0.95rem;">Ethereum</span>
+          </div>
+          <span style="font-size:0.85rem; color:#6B7280;">ERC20 ›</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Lien retour au tableau de bord -->
+    <a href="dashboard.html#abonnement" class="back-footer-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Annuler et retourner au tableau de bord</span>
+    </a>
+
+  </div>
+
+  <!-- MODAL DE PAIEMENT & VALIDATION -->
+  <div class="payment-modal-backdrop" id="payment-modal-backdrop">
+    <div class="payment-modal-card">
+      <button type="button" class="modal-close-btn" onclick="closePaymentModal()">✕</button>
+
+      <!-- Étape 1 : Saisie & Validation du paiement -->
+      <div id="modal-step-input">
+        <div class="modal-header-info">
+          <div class="modal-method-avatar" id="modal-avatar" style="background:#000;">
+            <span id="modal-avatar-content" style="color:#FFF; font-weight:700;">OM</span>
+          </div>
+          <h3 class="modal-method-title" id="modal-title">Orange Money</h3>
+          <p style="font-size:0.9rem; color:#6B7280;">Boutique Pro • Renouvellement 1 mois</p>
+          <div class="modal-amount-tag">15 000 FCFA</div>
+        </div>
+
+        <form id="payment-exec-form" onsubmit="executePayment(event)">
+          <div class="modal-input-group" id="group-phone-input">
+            <label for="modal-phone">Numéro de débit Mobile Money</label>
+            <input type="tel" id="modal-phone" class="modal-text-input" placeholder="+226 00000000" required>
+          </div>
+
+          <div class="modal-input-group" id="group-card-input" style="display:none;">
+            <label for="modal-card-num">Numéro de carte</label>
+            <input type="text" id="modal-card-num" class="modal-text-input" placeholder="4000 1234 5678 9010" style="margin-bottom:0.6rem;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;">
+              <input type="text" id="modal-card-exp" class="modal-text-input" placeholder="MM/AA">
+              <input type="text" id="modal-card-cvc" class="modal-text-input" placeholder="CVC">
+            </div>
+          </div>
+
+          <div class="modal-hint-box" id="modal-hint">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#234635" stroke-width="2" style="flex-shrink:0; margin-top:2px;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span id="modal-hint-text">Une demande de confirmation USSD sera envoyée instantanément sur votre téléphone mobile.</span>
+          </div>
+
+          <button type="submit" class="btn-confirm-pay" id="btn-modal-confirm">
+            <span>Valider le paiement (15 000 FCFA)</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Étape 2 : Succès & Retour -->
+      <div class="success-content-wrap" id="modal-step-success">
+        <div class="success-icon-badge">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h3 style="font-size:1.4rem; font-weight:800; color:#111827; margin-bottom:0.5rem;">Paiement Réussi !</h3>
+        <p style="font-size:0.95rem; color:#4B5563; line-height:1.5; margin-bottom:1.5rem;">
+          Votre abonnement <strong>Boutique Pro</strong> a été renouvelé avec succès jusqu'au <strong>25 novembre 2026</strong>.
+        </p>
+
+        <button type="button" class="btn-confirm-pay" onclick="finishAndRedirect()" style="background:#234635;">
+          <span>Retourner au Tableau de Bord</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Lecture des paramètres passés depuis dashboard.html
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentCountryCode = urlParams.get('country') || 'BF';
+    let currentCountryName = urlParams.get('countryName') || 'Burkina Faso';
+    let currentDialCode = urlParams.get('dialCode') || '+226';
+    let userPhone = urlParams.get('phone') || '';
+    const amountVal = urlParams.get('amount') || '15000';
+
+    // Initialisation au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ajuster le pays selon les paramètres
+      if (currentCountryCode === 'CI' || currentCountryName.toLowerCase().includes('ivoire')) {
+        selectCountry('CI', 'Côte d\'Ivoire', '+225');
+      } else if (currentCountryCode === 'SN' || currentCountryName.toLowerCase().includes('senegal')) {
+        selectCountry('SN', 'Sénégal', '+221');
+      } else if (currentCountryCode === 'ML' || currentCountryName.toLowerCase().includes('mali')) {
+        selectCountry('ML', 'Mali', '+223');
+      } else {
+        selectCountry('BF', 'Burkina Faso', '+226');
+      }
+
+      if (userPhone) {
+        const modalPhoneInput = document.getElementById('modal-phone');
+        if (modalPhoneInput) {
+          modalPhoneInput.value = userPhone.startsWith('+') ? userPhone : `${currentDialCode} ${userPhone}`.trim();
+        }
+      }
+    });
+
+    function toggleOrderSummary() {
+      const summaryBox = document.getElementById('order-summary-box');
+      const chevron = document.getElementById('summary-chevron');
+      if (summaryBox.style.display === 'none') {
+        summaryBox.style.display = 'flex';
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        summaryBox.style.display = 'none';
+        chevron.style.transform = 'rotate(-90deg)';
+      }
+    }
+
+    function toggleCountryDropdown() {
+      const menu = document.getElementById('country-dropdown-menu');
+      menu.classList.toggle('show');
+    }
+
+    function selectCountry(code, name, dial, event) {
+      if (event) event.stopPropagation();
+      currentCountryCode = code;
+      currentCountryName = name;
+      currentDialCode = dial;
+
+      const nameEl = document.getElementById('selected-country-name');
+      const flagEl = document.getElementById('selected-country-flag');
+      const menu = document.getElementById('country-dropdown-menu');
+
+      if (nameEl) nameEl.textContent = name;
+      if (menu) menu.classList.remove('show');
+
+      // Mettre à jour l'icône du drapeau
+      if (flagEl) {
+        if (code === 'BF') {
+          flagEl.innerHTML = `
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="36" height="18" fill="#EF3340" />
+              <rect y="18" width="36" height="18" fill="#009739" />
+              <polygon points="18,10.5 20.3,17.7 27.8,17.7 21.8,22.1 24.1,29.3 18,24.8 11.9,29.3 14.2,22.1 8.2,17.7 15.7,17.7" fill="#FCD116" />
+            </svg>
+          `;
+        } else if (code === 'CI') {
+          flagEl.innerHTML = `
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="12" height="36" fill="#F77F00" />
+              <rect x="12" width="12" height="36" fill="#FFFFFF" />
+              <rect x="24" width="12" height="36" fill="#009E49" />
+            </svg>
+          `;
+        } else if (code === 'SN') {
+          flagEl.innerHTML = `
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="12" height="36" fill="#00853F" />
+              <rect x="12" width="12" height="36" fill="#FDEF42" />
+              <rect x="24" width="12" height="36" fill="#E31B23" />
+              <polygon points="18,13 19.5,17.5 24,17.5 20.3,20.2 21.7,24.7 18,22 14.3,24.7 15.7,20.2 12,17.5 16.5,17.5" fill="#00853F" />
+            </svg>
+          `;
+        } else if (code === 'ML') {
+          flagEl.innerHTML = `
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="12" height="36" fill="#14B53A" />
+              <rect x="12" width="12" height="36" fill="#FCD116" />
+              <rect x="24" width="12" height="36" fill="#CE1126" />
+            </svg>
+          `;
+        } else {
+          flagEl.innerHTML = `
+            <svg viewBox="0 0 36 36" width="28" height="28">
+              <rect width="36" height="36" fill="#234635" />
+            </svg>
+          `;
+        }
+      }
+
+      // Adapter le placeholder téléphone
+      const phoneInput = document.getElementById('modal-phone');
+      if (phoneInput && !phoneInput.value) {
+        phoneInput.placeholder = `${dial} Votre numéro`;
+      }
+    }
+
+    // Fermer le dropdown de pays au clic extérieur
+    window.addEventListener('click', (e) => {
+      const box = document.getElementById('country-selector-box');
+      const menu = document.getElementById('country-dropdown-menu');
+      if (box && !box.contains(e.target)) {
+        if (menu) menu.classList.remove('show');
+      }
+    });
+
+    function toggleCryptoOptions() {
+      const cryptoBox = document.getElementById('crypto-options-container');
+      const chevron = document.getElementById('crypto-chevron');
+      cryptoBox.classList.toggle('show');
+      if (cryptoBox.classList.contains('show')) {
+        chevron.style.transform = 'rotate(180deg)';
+      } else {
+        chevron.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function openPaymentModal(methodName, methodId, brandColor) {
+      const backdrop = document.getElementById('payment-modal-backdrop');
+      const title = document.getElementById('modal-title');
+      const avatar = document.getElementById('modal-avatar');
+      const avatarContent = document.getElementById('modal-avatar-content');
+      const phoneGroup = document.getElementById('group-phone-input');
+      const cardGroup = document.getElementById('group-card-input');
+      const hintText = document.getElementById('modal-hint-text');
+      const phoneInput = document.getElementById('modal-phone');
+
+      title.textContent = methodName;
+      avatar.style.background = brandColor;
+
+      // Affichage du bon formulaire
+      if (methodId === 'card') {
+        phoneGroup.style.display = 'none';
+        cardGroup.style.display = 'block';
+        avatarContent.innerHTML = `💳`;
+        hintText.textContent = 'Paiement sécurisé par carte bancaire avec protocole 3D-Secure.';
+      } else if (methodId.startsWith('crypto')) {
+        phoneGroup.style.display = 'none';
+        cardGroup.style.display = 'none';
+        avatarContent.innerHTML = `₮`;
+        hintText.innerHTML = 'Scannez le QR Code ou envoyez le montant exact en USDT (TRC20) à l\'adresse générée.';
+      } else {
+        phoneGroup.style.display = 'block';
+        cardGroup.style.display = 'none';
+        avatarContent.innerHTML = methodName.split(' ')[0].substring(0, 2).toUpperCase();
+        
+        if (userPhone) {
+          phoneInput.value = userPhone;
+        } else if (!phoneInput.value) {
+          phoneInput.value = `${currentDialCode} `;
+        }
+
+        if (methodId === 'orange-money') {
+          hintText.textContent = 'Validez la demande de paiement en tapant le code #144*4*6# ou via l\'application Orange Money.';
+        } else if (methodId === 'wave') {
+          hintText.textContent = 'Ouvrez votre application Wave pour confirmer le paiement en 1 clic.';
+        } else if (methodId === 'sank') {
+          hintText.textContent = 'Validez la notification reçue dans votre application Sank Money.';
+        } else if (methodId === 'coris') {
+          hintText.textContent = 'Entrez votre code secret Coris Money pour approuver la transaction.';
+        } else if (methodId === 'telecel') {
+          hintText.textContent = 'Validez le débit en composant votre code secret Telecel Money.';
+        } else {
+          hintText.textContent = 'Une invite de validation USSD vous sera envoyée pour approuver le débit.';
+        }
+      }
+
+      document.getElementById('modal-step-input').style.display = 'block';
+      document.getElementById('modal-step-success').style.display = 'none';
+      backdrop.classList.add('open');
+    }
+
+    function closePaymentModal() {
+      const backdrop = document.getElementById('payment-modal-backdrop');
+      backdrop.classList.remove('open');
+    }
+
+    function executePayment(e) {
+      if (e) e.preventDefault();
+      const submitBtn = document.getElementById('btn-modal-confirm');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite;">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.3"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10"></path>
+        </svg>
+        <span>Traitement en cours...</span>
+      `;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Valider le paiement (15 000 FCFA)</span>`;
+
+        document.getElementById('modal-step-input').style.display = 'none';
+        document.getElementById('modal-step-success').style.display = 'block';
+
+        if (window.confetti) {
+          window.confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
+        }
+
+        // Enregistrer l'état du renouvellement
+        try {
+          localStorage.setItem('sakbi_pro_renewed', 'true');
+        } catch(err) {}
+      }, 1500);
+    }
+
+    function finishAndRedirect() {
+      window.location.href = 'dashboard.html?payment_success=true#abonnement';
+    }
+  </script>
+</body>
+</html>

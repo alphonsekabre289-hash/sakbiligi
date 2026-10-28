@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Création • Nouvelle Boutique | Logicom</title>
+  <meta name="description" content="Lancez votre boutique en moins de 5 minutes. Aucune carte bancaire requise. Tout depuis Logicom." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <style>
+    /* ========================================================
+       SAKBI SIGNUP & LOGIN - EXACT PIXEL-PERFECT RECREATION
+       ======================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-cream: #FBFBF9;
+      --bg-forest: #193627;
+      --bg-forest-btn: #657D6A;
+      --bg-forest-btn-hover: #193627;
+      --text-dark: #111827;
+      --text-muted: #52525B;
+      --text-light-muted: #6B7280;
+      --accent-lime: #A3E635;
+      --accent-green-tag: #84CC16;
+      --border-input: #D1D5DB;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html, body {
+      min-height: 100%;
+      width: 100%;
+      font-family: var(--font-main);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .split-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ==========================================
+       LEFT COLUMN: SIGNUP FORM (50% Width)
+       ========================================== */
+    .col-left {
+      flex: 1;
+      width: 50%;
+      background-color: var(--bg-cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 4.5rem;
+      position: relative;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 490px;
+    }
+
+    /* TOP BAR (Exact match to Image 2) */
+    .top-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .brand-logo-left {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-logo-left .dot {
+      color: var(--accent-green-tag);
+      font-size: 1.85rem;
+      line-height: 0;
+    }
+
+    .top-nav-right {
+      display: flex;
+      align-items: center;
+      font-size: 0.88rem;
+      color: #5E6660;
+    }
+
+    .login-switch-link {
+      color: var(--text-dark);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 0.35rem;
+      cursor: pointer;
+    }
+
+    .lang-toggle-text {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #6B7280;
+      margin-left: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* TAG WITH TRAILING LINE */
+    .tag-line-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .creation-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: #78716C;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .trailing-divider-line {
+      flex: 1;
+      height: 1px;
+      background-color: #E7E5E4;
+    }
+
+    /* MAIN HEADLINE */
+    .signup-headline {
+      font-size: 3.1rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: #18181B;
+      margin-bottom: 1.2rem;
+    }
+
+    .signup-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: #52525B;
+    }
+
+    /* SUBTITLE */
+    .signup-subtext {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+    }
+
+    /* FORM FIELDS */
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #6B7280;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid var(--border-input);
+      border-radius: 10px;
+      padding: 0 1rem;
+      height: 48px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-wrapper:focus-within {
+      border-color: var(--bg-forest);
+      box-shadow: 0 0 0 3px rgba(25, 54, 39, 0.1);
+    }
+
+    .input-wrapper svg.field-icon {
+      color: #6B7280;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .input-wrapper input::placeholder {
+      color: #9CA3AF;
+    }
+
+    .toggle-pwd-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #6B7280;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .toggle-pwd-btn:hover {
+      color: var(--text-dark);
+    }
+
+    /* Password Strength Indicator */
+    .strength-meter-container {
+      margin-top: 0.65rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .strength-bars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 0.45rem;
+    }
+
+    .strength-bar {
+      height: 3px;
+      border-radius: 2px;
+      background-color: #E5E7EB;
+      transition: background-color 0.25s ease;
+    }
+
+    .strength-bar.active-weak { background-color: #EF4444; }
+    .strength-bar.active-medium { background-color: #F59E0B; }
+    .strength-bar.active-strong { background-color: #22C55E; }
+
+    .strength-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #6B7280;
+      text-transform: uppercase;
+    }
+
+    /* Checkbox & Terms */
+    .terms-row {
+      margin-top: 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .checkbox-container {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      cursor: pointer;
+      user-select: none;
+      color: var(--text-dark);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .checkbox-container input {
+      display: none;
+    }
+
+    .checkbox-custom {
+      width: 17px;
+      height: 17px;
+      border: 1.5px solid #9CA3AF;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFFFFF;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .checkbox-container input:checked + .checkbox-custom {
+      background-color: var(--bg-forest);
+      border-color: var(--bg-forest);
+    }
+
+    .checkbox-custom::after {
+      content: "";
+      width: 4px;
+      height: 8px;
+      border: solid #FFFFFF;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      display: none;
+      margin-top: -2px;
+    }
+
+    .checkbox-container input:checked + .checkbox-custom::after {
+      display: block;
+    }
+
+    .terms-link {
+      color: var(--text-dark);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      height: 48px;
+      background-color: var(--bg-forest);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-main);
+      font-size: 0.98rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #1F4330;
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      background-color: #9CA3AF !important;
+    }
+
+    .input-wrapper.error {
+      border-color: #EF4444 !important;
+      background-color: #FEF2F2 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+    }
+
+    .input-wrapper.valid {
+      border-color: #22C55E;
+    }
+
+    .field-error-msg {
+      color: #DC2626;
+      font-size: 0.78rem;
+      font-weight: 500;
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .auth-alert-box {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+      color: #991B1B;
+      font-size: 0.86rem;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .pwd-rules-container {
+      margin-top: 0.75rem;
+      background: #F7F7F4;
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #E5E7EB;
+    }
+
+    .pwd-rules-title {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #4B5563;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.45rem;
+      font-size: 0.68rem;
+    }
+
+    .pwd-rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem 0.75rem;
+    }
+
+    .pwd-rule-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #6B7280;
+      font-size: 0.75rem;
+      transition: color 0.15s ease;
+    }
+
+    .pwd-rule-item.valid {
+      color: #16A34A;
+      font-weight: 600;
+    }
+
+    .pwd-rule-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #E5E7EB;
+      color: #6B7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .pwd-rule-item.valid .pwd-rule-dot {
+      background: #22C55E;
+      color: #FFFFFF;
+    }
+
+    .auth-mode-btn {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 0.35rem;
+      cursor: pointer;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    /* Trust Badges */
+    .trust-badges-container {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .trust-badges-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #5E6660;
+      text-transform: uppercase;
+    }
+
+    .trust-badge-item .check {
+      color: #22C55E;
+      font-weight: 800;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.6rem 0 1.25rem;
+      color: #9CA3AF;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .divider span {
+      padding: 0 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .signup-text {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .signup-text a {
+      color: var(--bg-forest);
+      font-weight: 700;
+      text-decoration: none;
+      transition: text-decoration 0.15s ease;
+    }
+
+    .signup-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================
+       RIGHT COLUMN: BRAND & DEMO (50% Width)
+       ========================================== */
+    .col-right {
+      flex: 1;
+      width: 50%;
+      background: linear-gradient(150deg, #1C3829 0%, #12281D 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .col-right::before {
+      content: '';
+      position: absolute;
+      top: -15%;
+      right: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.14) 0%, rgba(34, 197, 94, 0.04) 50%, transparent 70%);
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    .brand-box {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--accent-green-tag);
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .brand-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      color: #FFFFFF;
+      margin-bottom: 1.6rem;
+    }
+
+    .brand-title em {
+      font-style: italic;
+      color: var(--accent-lime);
+      font-weight: 700;
+    }
+
+    .brand-desc {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: #D1D5DB;
+      margin-bottom: 2.8rem;
+    }
+
+    .demo-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem 1.25rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .demo-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .demo-card-title {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #F3F4F6;
+      font-weight: 500;
+    }
+
+    .demo-card-live {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #22C55E;
+      box-shadow: 0 0 8px #22C55E;
+    }
+
+    .demo-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .demo-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-stat-name {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #9CA3AF;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+
+    .demo-stat-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+    }
+
+    .demo-stat-value.lime {
+      color: var(--accent-lime);
+    }
+
+    .demo-stat-value small {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #D1D5DB;
+    }
+
+    .demo-chart {
+      height: 75px;
+      width: 100%;
+    }
+
+    .demo-chart svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--bg-forest);
+      color: #FFFFFF;
+      padding: 0.85rem 1.4rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      font-size: 0.92rem;
+      font-weight: 500;
+      z-index: 1000;
+      display: none;
+      animation: fadeInToast 0.25s ease;
+    }
+
+    @keyframes fadeInToast {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 1024px) {
+      .split-layout {
+        flex-direction: column;
+      }
+      .col-left, .col-right {
+        width: 100%;
+        padding: 3rem 1.75rem;
+      }
+      .signup-headline {
+        font-size: 2.4rem;
+      }
+      .brand-title {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="split-layout">
+    <!-- ================= LEFT PANEL: SIGNUP FORM ================= -->
+    <div class="col-left">
+      <div class="form-box">
+        
+        <!-- 1. TOP NAV ROW -->
+        <div class="top-nav-row">
+          <a href="./index.html" class="brand-logo-left" title="Logicom" style="display:inline-flex;align-items:center;text-decoration:none;">
+            <img src="/logicom-logo.svg" alt="Logicom" style="height:34px;width:auto;display:block;" />
+          </a>
+          <div class="top-nav-right">
+            <span id="nav-mode-label">Déjà un compte ?</span>
+            <button type="button" class="auth-mode-btn" id="btn-switch-mode">Connectez-vous</button>
+            <span class="lang-toggle-text">FR • EN</span>
+          </div>
+        </div>
+
+        <!-- Security / Rate Limit Alert Box -->
+        <div id="auth-alert" class="auth-alert-box" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div id="auth-alert-text"></div>
+        </div>
+
+        <!-- 2. TAG WITH TRAILING DIVIDER LINE -->
+        <div class="tag-line-row">
+          <span class="creation-tag" id="page-tag">CRÉATION • NOUVELLE BOUTIQUE</span>
+          <span class="trailing-divider-line"></span>
+        </div>
+
+        <!-- 3. MAIN HEADLINE -->
+        <h1 class="signup-headline" id="main-headline">
+          Lancez votre boutique en <em>moins de 5 minutes.</em>
+        </h1>
+
+        <!-- 4. SUBTITLE -->
+        <p class="signup-subtext" id="main-subtext">
+          Aucune carte bancaire requise. Configurez votre catalogue, partagez votre lien, encaissez vos premières commandes — tout depuis Logicom.
+        </p>
+
+        <!-- 5. SIGNUP / LOGIN FORM -->
+        <form id="signup-form" novalidate>
+          <!-- Row 1: Prénom & Nom (Masqué en mode Connexion) -->
+          <div class="name-row" id="row-names">
+            <div>
+              <label class="field-label" for="prenom">PRÉNOM</label>
+              <div class="input-wrapper" id="wrap-prenom">
+                <input type="text" id="prenom" placeholder="John" autocomplete="given-name" />
+              </div>
+              <div id="prenom-error" class="field-error-msg" style="display:none;"></div>
+            </div>
+
+            <div>
+              <label class="field-label" for="nom">NOM</label>
+              <div class="input-wrapper" id="wrap-nom">
+                <input type="text" id="nom" placeholder="Doe" autocomplete="family-name" />
+              </div>
+              <div id="nom-error" class="field-error-msg" style="display:none;"></div>
+            </div>
+          </div>
+
+          <!-- Row 2: E-mail Professionnelle -->
+          <div class="form-group">
+            <label class="field-label" for="email">ADRESSE E-MAIL PROFESSIONNELLE</label>
+            <div class="input-wrapper" id="wrap-email">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <input type="email" id="email" placeholder="vous@exemple.com" required autocomplete="email" />
+            </div>
+            <div id="email-error" class="field-error-msg" style="display:none;"></div>
+          </div>
+
+          <!-- Row 3: Mot de Passe avec Indicateur et Règles Strictes -->
+          <div class="form-group">
+            <label class="field-label" for="password">MOT DE PASSE</label>
+            <div class="input-wrapper" id="wrap-password">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <input type="password" id="password" placeholder="Au moins 8 caractères" required autocomplete="current-password" />
+              <button type="button" class="toggle-pwd-btn" id="btn-toggle-pwd" title="Afficher/masquer le mot de passe">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" id="eye-svg">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+            <div id="password-error" class="field-error-msg" style="display:none;"></div>
+
+            <!-- Jauge de solidité 4 barres -->
+            <div class="strength-meter-container" id="strength-container">
+              <div class="strength-bars">
+                <div class="strength-bar" id="bar-1"></div>
+                <div class="strength-bar" id="bar-2"></div>
+                <div class="strength-bar" id="bar-3"></div>
+                <div class="strength-bar" id="bar-4"></div>
+              </div>
+              <span class="strength-label" id="strength-text">TAPEZ UN MOT DE PASSE</span>
+            </div>
+
+            <!-- Checklist interactive des exigences de sécurité -->
+            <div class="pwd-rules-container" id="pwd-rules-box">
+              <div class="pwd-rules-title">EXIGENCES DE SÉCURITÉ DU MOT DE PASSE :</div>
+              <div class="pwd-rules-grid">
+                <div class="pwd-rule-item" id="rule-len">
+                  <span class="pwd-rule-dot">○</span> Au moins 8 caractères
+                </div>
+                <div class="pwd-rule-item" id="rule-upper">
+                  <span class="pwd-rule-dot">○</span> 1 lettre majuscule (A-Z)
+                </div>
+                <div class="pwd-rule-item" id="rule-lower">
+                  <span class="pwd-rule-dot">○</span> 1 lettre minuscule (a-z)
+                </div>
+                <div class="pwd-rule-item" id="rule-num">
+                  <span class="pwd-rule-dot">○</span> 1 chiffre (0-9)
+                </div>
+                <div class="pwd-rule-item" id="rule-spec" style="grid-column: span 2;">
+                  <span class="pwd-rule-dot">○</span> 1 caractère spécial (!@#$%^&*...)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkbox: Conditions d'utilisation -->
+          <div class="terms-row" id="row-terms">
+            <label class="checkbox-container">
+              <input type="checkbox" id="accept-terms" />
+              <span class="checkbox-custom"></span>
+              <span>J'accepte les <a href="#" class="terms-link">conditions d'utilisation</a> et la <a href="#" class="terms-link">politique de confidentialité</a></span>
+            </label>
+            <div id="terms-error" class="field-error-msg" style="display:none;"></div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <span id="btn-submit-text">Créer mon compte</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <!-- 3 Trust Badges (Matches Screenshot 2) -->
+          <div class="trust-badges-container">
+            <div class="trust-badges-row">
+              <span class="trust-badge-item">
+                <span class="check">✓</span> SANS CARTE BANCAIRE
+              </span>
+              <span class="trust-badge-item">
+                <span class="check">✓</span> GRATUIT POUR DÉMARRER
+              </span>
+            </div>
+            <div class="trust-badges-row">
+              <span class="trust-badge-item">
+                <span class="check">✓</span> 5 MIN DE SETUP
+              </span>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider">
+            <span id="divider-text">OU BASCULER VERS</span>
+          </div>
+
+          <div class="signup-text">
+            <span id="bottom-mode-label">Vous avez déjà un compte ?</span>
+            <button type="button" class="auth-mode-btn" id="btn-bottom-switch">Connectez-vous ↗</button>
+          </div>
+
+          <!-- Accès Démo Direct (sans blocage) -->
+          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(35, 70, 53, 0.05); border: 1px dashed rgba(35, 70, 53, 0.25); border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.8rem; color: #52525B; margin-bottom: 0.6rem; font-weight: 500;">
+              ✨ Tester ou visiter immédiatement la plateforme :
+            </div>
+            <a href="./dashboard.html?demo=true" id="btn-direct-demo" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #234635; color: #FFFFFF; text-decoration: none; font-size: 0.85rem; font-weight: 600; padding: 0.65rem 1.25rem; border-radius: 8px; transition: all 0.2s ease;">
+              <span>⚡ Accéder directement au Tableau de bord (Mode Démo) ↗</span>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= RIGHT PANEL ================= -->
+    <div class="col-right">
+      <div class="brand-box">
+        <div style="margin-bottom: 1.5rem;">
+          <img src="/logicom-logo-dark.svg" alt="Logicom" style="height: 48px; width: auto; display: block;" />
+        </div>
+        <div class="brand-tag">
+          <span>—</span> LA BOUTIQUE EN LIGNE, SIMPLIFIÉE
+        </div>
+
+        <h2 class="brand-title">
+          Gérez, personnalisez<br />
+          <em>et publiez en 3 minutes.</em>
+        </h2>
+
+        <p class="brand-desc">
+          Logicom réunit produits, commandes, livraisons et analytics dans une seule interface pensée pour les entrepreneurs ouest-africains.
+        </p>
+
+        <!-- Live Demo Card -->
+        <div class="demo-card">
+          <div class="demo-card-top">
+            <span class="demo-card-title">Aperçu • démo</span>
+            <div class="demo-card-live">
+              <span class="live-dot"></span>
+              <span>30 DERNIERS JOURS • LIVE</span>
+            </div>
+          </div>
+
+          <!-- 3 Stats -->
+          <div class="demo-stats">
+            <div class="demo-stat-item">
+              <span class="demo-stat-name">VISITES</span>
+              <strong class="demo-stat-value" id="stat-visites">121</strong>
+            </div>
+            <div class="demo-stat-item">
+              <span class="demo-stat-name">COMMANDES</span>
+              <strong class="demo-stat-value" id="stat-commandes">8</strong>
+            </div>
+            <div class="demo-stat-item">
+              <span class="demo-stat-name">REVENU</span>
+              <strong class="demo-stat-value lime" id="stat-revenu">185K <small>FCFA</small></strong>
+            </div>
+          </div>
+
+          <!-- Area Chart -->
+          <div class="demo-chart">
+            <svg viewBox="0 0 360 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="limeGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a3e635" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="#a3e635" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+              <path d="M 0,65 Q 60,60 120,55 T 240,42 T 320,25 T 355,8 L 355,80 L 0,80 Z" fill="url(#limeGrad)"></path>
+              <path d="M 0,65 Q 60,60 120,55 T 240,42 T 320,25 T 355,8" fill="none" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round"></path>
+              <circle cx="355" cy="8" r="4.5" fill="#a3e635" stroke="#12281D" stroke-width="2"></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-popup" id="toast-popup"></div>
+
+  <script>
+    // ========================================================
+    // SAKBI SECURE AUTHENTICATION SYSTEM
+    // Strict Validation • Crypto Hashing • Rate Limiting • Sessions
+    // ========================================================
+
+    // State
+    let authMode = 'signup'; // 'signup' ou 'login'
+    let rateLimitTimer = null;
+
+    // Supabase Cloud Configuration
+    const SAKBI_SUPABASE_URL = 'https://jcvpeyzetqgahoyryxhl.supabase.co';
+    const SAKBI_SUPABASE_ANON_KEY = 'sb_publishable_2kl0_LWNR1AFn-ozn-t8Hg_6VaZT4Df';
+    let supabaseClient = null;
+    try {
+      if (window.supabase && window.supabase.createClient) {
+        supabaseClient = window.supabase.createClient(SAKBI_SUPABASE_URL, SAKBI_SUPABASE_ANON_KEY, {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        });
+      }
+    } catch(e) {
+      console.warn('Initialisation Supabase:', e);
+    }
+
+    // Détection de confirmation d'e-mail (redirection depuis le lien d'activation reçu par mail)
+    if (supabaseClient) {
+      try {
+        supabaseClient.auth.onAuthStateChange(async (event, session) => {
+          if (event === 'SIGNED_IN' && session?.user) {
+            const user = session.user;
+            const meta = user.user_metadata || {};
+            const loggedUser = {
+              id: user.id,
+              prenom: meta.prenom || meta.full_name?.split(' ')[0] || 'Marchand',
+              nom: meta.nom || meta.full_name?.split(' ')[1] || '',
+              email: user.email
+            };
+            createAuthSession(loggedUser);
+            showToast(`🎉 E-mail confirmé avec succès ! Bienvenue, ${loggedUser.prenom}.`);
+            setTimeout(() => {
+              window.location.href = './dashboard.html';
+            }, 800);
+          }
+        });
+      } catch(e) {
+        console.warn('Erreur écoute AuthState:', e);
+      }
+    }
+
+    // Elements
+    const toggleBtn = document.getElementById('btn-toggle-pwd');
+    const pwdInput = document.getElementById('password');
+    const emailInput = document.getElementById('email');
+    const prenomInput = document.getElementById('prenom');
+    const nomInput = document.getElementById('nom');
+    const termsCheck = document.getElementById('accept-terms');
+    const eyeSvg = document.getElementById('eye-svg');
+    const signupForm = document.getElementById('signup-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnSubmitText = document.getElementById('btn-submit-text');
+    const authAlert = document.getElementById('auth-alert');
+    const authAlertText = document.getElementById('auth-alert-text');
+    const btnSwitchMode = document.getElementById('btn-switch-mode');
+    const btnBottomSwitch = document.getElementById('btn-bottom-switch');
+    const navModeLabel = document.getElementById('nav-mode-label');
+    const bottomModeLabel = document.getElementById('bottom-mode-label');
+    const pageTag = document.getElementById('page-tag');
+    const mainHeadline = document.getElementById('main-headline');
+    const mainSubtext = document.getElementById('main-subtext');
+    const rowNames = document.getElementById('row-names');
+    const rowTerms = document.getElementById('row-terms');
+    const pwdRulesBox = document.getElementById('pwd-rules-box');
+    const strengthContainer = document.getElementById('strength-container');
+    const dividerText = document.getElementById('divider-text');
+
+    // Rule Indicators
+    const ruleLen = document.getElementById('rule-len');
+    const ruleUpper = document.getElementById('rule-upper');
+    const ruleLower = document.getElementById('rule-lower');
+    const ruleNum = document.getElementById('rule-num');
+    const ruleSpec = document.getElementById('rule-spec');
+    const strengthBars = [
+      document.getElementById('bar-1'),
+      document.getElementById('bar-2'),
+      document.getElementById('bar-3'),
+      document.getElementById('bar-4')
+    ];
+    const strengthText = document.getElementById('strength-text');
+
+    // Blocklist of throwaway / fake / test domains
+    const DISPOSABLE_DOMAINS = [
+      'test.com', 'example.com', 'mailinator.com', 'fake.com',
+      'tempmail.com', 'trashmail.com', 'yopmail.com', '123.com',
+      'sample.com', 'xyz.com', 'test.fr', 'test.net', 'dispostable.com',
+      'guerrillamail.com', 'sharklasers.com', 'getairmail.com'
+    ];
+
+    // Blocklist of common weak passwords
+    const COMMON_PASSWORDS = [
+      '12345678', 'password', 'password123', 'azerty123', 'qwerty123',
+      'admin123', '123456789', 'motdepasse', 'sakbi123', '00000000',
+      'welcome1', 'passer123', 'iloveyou', 'secret123'
+    ];
+
+    // 1. Password Visibility Toggle
+    if (toggleBtn && pwdInput) {
+      toggleBtn.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+
+        if (isPwd) {
+          eyeSvg.innerHTML = `
+            <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+            <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+            <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+            <line x1="2" y1="2" x2="22" y2="22"></line>
+          `;
+        } else {
+          eyeSvg.innerHTML = `
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          `;
+        }
+      });
+    }
+
+    // 2. Strict Password Strength Evaluator
+    function evaluatePassword(val) {
+      const len = val.length;
+      const hasLen = len >= 8;
+      const hasUpper = /[A-Z]/.test(val);
+      const hasLower = /[a-z]/.test(val);
+      const hasNum = /[0-9]/.test(val);
+      const hasSpec = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(val);
+      const notCommon = !COMMON_PASSWORDS.includes(val.toLowerCase().trim());
+
+      const score = [hasLen, hasUpper, hasLower, hasNum, hasSpec].filter(Boolean).length;
+      const isCompliant = hasLen && hasUpper && hasLower && hasNum && hasSpec && notCommon;
+
+      return { len, hasLen, hasUpper, hasLower, hasNum, hasSpec, notCommon, score, isCompliant };
+    }
+
+    // Update rule item visual
+    function setRuleState(el, isValid) {
+      if (!el) return;
+      const dot = el.querySelector('.pwd-rule-dot');
+      if (isValid) {
+        el.classList.add('valid');
+        if (dot) dot.textContent = '✓';
+      } else {
+        el.classList.remove('valid');
+        if (dot) dot.textContent = '○';
+      }
+    }
+
+    // 2. Real-time password inspection réactive (frappe, copier-coller, remplissage auto)
+    function handlePasswordInspection() {
+      if (!pwdInput) return;
+      clearFieldError('password');
+      const val = pwdInput.value || '';
+      const res = evaluatePassword(val);
+
+      // Update rules checklist (cercles et coches vertes)
+      setRuleState(ruleLen, res.hasLen);
+      setRuleState(ruleUpper, res.hasUpper);
+      setRuleState(ruleLower, res.hasLower);
+      setRuleState(ruleNum, res.hasNum);
+      setRuleState(ruleSpec, res.hasSpec);
+
+      // Reset strength bars
+      strengthBars.forEach(b => b.className = 'strength-bar');
+
+      if (res.len === 0) {
+        strengthText.textContent = 'TAPEZ UN MOT DE PASSE';
+      } else if (res.score <= 2 || !res.hasLen) {
+        strengthBars[0].classList.add('active-weak');
+        strengthText.textContent = 'MOT DE PASSE TRÈS FAIBLE (EXIGENCES NON RESPECTÉES)';
+      } else if (res.score === 3) {
+        strengthBars[0].classList.add('active-medium');
+        strengthBars[1].classList.add('active-medium');
+        strengthText.textContent = 'MOT DE PASSE MOYEN (COMPLÉTEZ LES RÈGLES)';
+      } else if (res.score === 4) {
+        strengthBars[0].classList.add('active-strong');
+        strengthBars[1].classList.add('active-strong');
+        strengthBars[2].classList.add('active-strong');
+        strengthText.textContent = 'MOT DE PASSE BON (PRESQUE COMPLET)';
+      } else if (res.isCompliant) {
+        strengthBars.forEach(b => b.classList.add('active-strong'));
+        strengthText.textContent = 'MOT DE PASSE SÉCURISÉ & CONFORME ✓';
+      }
+    }
+
+    if (pwdInput) {
+      ['input', 'change', 'keyup', 'paste', 'focus'].forEach(evt => {
+        pwdInput.addEventListener(evt, handlePasswordInspection);
+      });
+      // Détection automatique au chargement (si prérempli)
+      setTimeout(handlePasswordInspection, 250);
+      setTimeout(handlePasswordInspection, 800);
+    }
+
+    // 3. Strict Email Validator
+    function validateEmail(email) {
+      const trimmed = (email || '').trim();
+      if (!trimmed) {
+        return { isValid: false, message: 'L\'adresse e-mail est obligatoire.' };
+      }
+      // RFC 5322 standard regex pattern
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+      if (!emailRegex.test(trimmed)) {
+        return { isValid: false, message: 'Format d\'e-mail invalide. Exemple : nom@entreprise.com' };
+      }
+      const parts = trimmed.split('@');
+      const domain = parts[1]?.toLowerCase();
+      if (!domain || DISPOSABLE_DOMAINS.includes(domain)) {
+        return { isValid: false, message: 'Les adresses e-mails jetables ou de test sont refusées. Utilisez un domaine réel.' };
+      }
+      const tld = domain.split('.').pop();
+      if (!tld || tld.length < 2 || /^\d+$/.test(tld)) {
+        return { isValid: false, message: 'Extension de domaine invalide (ex: .com, .ci, .sn).' };
+      }
+      return { isValid: true, email: trimmed.toLowerCase() };
+    }
+
+    if (emailInput) {
+      emailInput.addEventListener('blur', () => {
+        if (!emailInput.value.trim()) return;
+        const res = validateEmail(emailInput.value);
+        if (!res.isValid) {
+          showFieldError('email', res.message);
+        } else {
+          clearFieldError('email');
+        }
+      });
+      emailInput.addEventListener('input', () => {
+        clearFieldError('email');
+      });
+    }
+
+    // 4. Rate Limiting System (Section 6.2 de l'Audit)
+    function getRateLimitState() {
+      try {
+        const raw = sessionStorage.getItem('sakbi_rate_limit');
+        if (!raw) return { attempts: 0, firstAttempt: Date.now(), lockedUntil: 0 };
+        return JSON.parse(raw);
+      } catch(e) {
+        return { attempts: 0, firstAttempt: Date.now(), lockedUntil: 0 };
+      }
+    }
+
+    function checkRateLimit() {
+      const now = Date.now();
+      const state = getRateLimitState();
+
+      if (state.lockedUntil && now < state.lockedUntil) {
+        const remaining = Math.ceil((state.lockedUntil - now) / 1000);
+        return { isLocked: true, remaining };
+      }
+
+      if (now - state.firstAttempt > 60000) {
+        sessionStorage.removeItem('sakbi_rate_limit');
+      }
+      return { isLocked: false };
+    }
+
+    function registerFailedAttempt() {
+      const now = Date.now();
+      const state = getRateLimitState();
+      state.attempts = (state.attempts || 0) + 1;
+      if (state.attempts >= 5) {
+        state.lockedUntil = now + 30000; // Verrouillage 30s
+      }
+      sessionStorage.setItem('sakbi_rate_limit', JSON.stringify(state));
+    }
+
+    function resetRateLimit() {
+      sessionStorage.removeItem('sakbi_rate_limit');
+    }
+
+    function handleRateLock(remaining) {
+      submitBtn.disabled = true;
+      authAlert.style.display = 'flex';
+      authAlertText.innerHTML = `<strong>Sécurité anti-force brute activée :</strong> Trop de tentatives infructueuses. Veuillez patienter <strong>${remaining}s</strong> avant de réessayer.`;
+
+      if (rateLimitTimer) clearInterval(rateLimitTimer);
+      let count = remaining;
+      rateLimitTimer = setInterval(() => {
+        count--;
+        if (count <= 0) {
+          clearInterval(rateLimitTimer);
+          submitBtn.disabled = false;
+          authAlert.style.display = 'none';
+          resetRateLimit();
+        } else {
+          authAlertText.innerHTML = `<strong>Sécurité anti-force brute activée :</strong> Trop de tentatives. Veuillez patienter <strong>${count}s</strong>...`;
+        }
+      }, 1000);
+    }
+
+    // 5. Cryptographic Password Hashing (Web Crypto API SHA-256 avec Sel)
+    async function hashPassword(password, salt) {
+      const enc = new TextEncoder();
+      const data = enc.encode(`${salt}:${password}:sakbi_secret_salt_2026`);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function generateSalt() {
+      const arr = new Uint8Array(16);
+      crypto.getRandomValues(arr);
+      return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // 6. User Storage & Session Management
+    function getStoredUsers() {
+      try {
+        const raw = localStorage.getItem('sakbi_users_db');
+        return raw ? JSON.parse(raw) : {};
+      } catch(e) {
+        return {};
+      }
+    }
+
+    function saveUser(user) {
+      const users = getStoredUsers();
+      users[user.email.toLowerCase()] = user;
+      localStorage.setItem('sakbi_users_db', JSON.stringify(users));
+    }
+
+    function createAuthSession(user) {
+      const token = crypto.randomUUID ? crypto.randomUUID() : 'tok_' + Math.random().toString(36).substring(2) + Date.now();
+      const session = {
+        token: token,
+        email: user.email,
+        name: `${user.prenom} ${user.nom}`.trim() || user.prenom || 'Marchand',
+        createdAt: Date.now(),
+        expiresAt: Date.now() + (24 * 60 * 60 * 1000) // 24 heures
+      };
+      localStorage.setItem('sakbi_auth_session', JSON.stringify(session));
+      localStorage.setItem('sakbi_user_name', session.name);
+      localStorage.setItem('sakbi_user_email', session.email);
+      if (!localStorage.getItem('sakbi_store_name')) {
+        localStorage.setItem('sakbi_store_name', 'LIVE');
+      }
+    }
+
+    // 7. Error & UI Helpers
+    function showFieldError(field, msg) {
+      const wrap = document.getElementById(`wrap-${field}`);
+      const err = document.getElementById(`${field}-error`);
+      if (wrap) wrap.classList.add('error');
+      if (err) {
+        err.textContent = msg;
+        err.style.display = 'flex';
+      }
+    }
+
+    function clearFieldError(field) {
+      const wrap = document.getElementById(`wrap-${field}`);
+      const err = document.getElementById(`${field}-error`);
+      if (wrap) wrap.classList.remove('error');
+      if (err) err.style.display = 'none';
+    }
+
+    function clearAllErrors() {
+      ['prenom', 'nom', 'email', 'password', 'terms'].forEach(clearFieldError);
+      authAlert.style.display = 'none';
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-popup');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 4000);
+    }
+
+    // 8. Mode Switcher (Inscription <-> Connexion)
+    function switchMode(newMode) {
+      authMode = newMode;
+      clearAllErrors();
+
+      if (authMode === 'login') {
+        pageTag.textContent = 'CONNEXION • ESPACE MARCHAND';
+        mainHeadline.innerHTML = 'Bon retour ! <em>Connectez-vous.</em>';
+        mainSubtext.textContent = 'Accédez immédiatement à vos commandes, votre catalogue et vos analytics en toute sécurité.';
+        rowNames.style.display = 'none';
+        rowTerms.style.display = 'none';
+        pwdRulesBox.style.display = 'none';
+        strengthContainer.style.display = 'none';
+        btnSubmitText.textContent = 'Se connecter à mon compte';
+        navModeLabel.textContent = 'Pas encore de compte ?';
+        btnSwitchMode.textContent = 'Inscrivez-vous';
+        bottomModeLabel.textContent = 'Pas encore de boutique ?';
+        btnBottomSwitch.textContent = 'Créer mon compte gratuitement ↗';
+        dividerText.textContent = 'OU CRÉEZ VOTRE COMPTE';
+        pwdInput.placeholder = 'Votre mot de passe';
+      } else {
+        pageTag.textContent = 'CRÉATION • NOUVELLE BOUTIQUE';
+        mainHeadline.innerHTML = 'Lancez votre boutique en <em>moins de 5 minutes.</em>';
+        mainSubtext.textContent = 'Aucune carte bancaire requise. Configurez votre catalogue, partagez votre lien, encaissez vos premières commandes — tout depuis Logicom.';
+        rowNames.style.display = 'grid';
+        rowTerms.style.display = 'block';
+        pwdRulesBox.style.display = 'block';
+        strengthContainer.style.display = 'block';
+        btnSubmitText.textContent = 'Créer mon compte';
+        navModeLabel.textContent = 'Déjà un compte ?';
+        btnSwitchMode.textContent = 'Connectez-vous';
+        bottomModeLabel.textContent = 'Vous avez déjà un compte ?';
+        btnBottomSwitch.textContent = 'Connectez-vous ↗';
+        dividerText.textContent = 'OU BASCULER VERS';
+        pwdInput.placeholder = 'Au moins 8 caractères';
+      }
+    }
+
+    if (btnSwitchMode) {
+      btnSwitchMode.addEventListener('click', () => {
+        switchMode(authMode === 'signup' ? 'login' : 'signup');
+      });
+    }
+
+    if (btnBottomSwitch) {
+      btnBottomSwitch.addEventListener('click', () => {
+        switchMode(authMode === 'signup' ? 'login' : 'signup');
+      });
+    }
+
+    // 9. Form Submission Handler with Strict Security Check
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearAllErrors();
+
+        // 1. Vérification du Rate Limiting
+        const limitCheck = checkRateLimit();
+        if (limitCheck.isLocked) {
+          handleRateLock(limitCheck.remaining);
+          return;
+        }
+
+        // 2. Récupération et nettoyage des valeurs
+        const prenom = prenomInput.value.trim();
+        const nom = nomInput.value.trim();
+        const emailRaw = emailInput.value.trim();
+        const pwd = pwdInput.value;
+
+        // 3. Validation stricte de l'Email
+        const emailRes = validateEmail(emailRaw);
+        if (!emailRes.isValid) {
+          showFieldError('email', emailRes.message);
+          emailInput.focus();
+          return;
+        }
+        const email = emailRes.email;
+
+        // ================= MODE INSCRIPTION =================
+        if (authMode === 'signup') {
+          // Validation Prénom / Nom
+          if (!prenom || prenom.length < 2) {
+            showFieldError('prenom', 'Veuillez saisir votre prénom (min. 2 caractères).');
+            prenomInput.focus();
+            return;
+          }
+          if (!nom || nom.length < 2) {
+            showFieldError('nom', 'Veuillez saisir votre nom de famille.');
+            nomInput.focus();
+            return;
+          }
+
+          // Validation stricte du Mot de passe
+          const pwdRes = evaluatePassword(pwd);
+          if (!pwdRes.isCompliant) {
+            let errorDetails = [];
+            if (!pwdRes.hasLen) errorDetails.push('au moins 8 caractères');
+            if (!pwdRes.hasUpper) errorDetails.push('une majuscule');
+            if (!pwdRes.hasLower) errorDetails.push('une minuscule');
+            if (!pwdRes.hasNum) errorDetails.push('un chiffre');
+            if (!pwdRes.hasSpec) errorDetails.push('un caractère spécial');
+            if (!pwdRes.notCommon) errorDetails.push('ne pas être un mot de passe trop commun');
+
+            const msg = `Mot de passe non sécurisé : il doit impérativement comporter ${errorDetails.join(', ')}.`;
+            showFieldError('password', msg);
+            pwdInput.focus();
+            return;
+          }
+
+          // Validation Conditions
+          if (!termsCheck.checked) {
+            showFieldError('terms', 'Vous devez accepter les conditions d\'utilisation.');
+            termsCheck.focus();
+            return;
+          }
+
+          // Vérification si l'utilisateur existe déjà
+          const users = getStoredUsers();
+          if (users[email]) {
+            showFieldError('email', 'Cette adresse e-mail est déjà associée à un compte. Veuillez vous connecter.');
+            emailInput.focus();
+            return;
+          }
+
+          submitBtn.disabled = true;
+          btnSubmitText.textContent = 'Sécurisation et création du compte...';
+
+          try {
+            let emailConfirmationNeeded = false;
+            let registeredUser = null;
+
+            // Tentative d'inscription Cloud via Supabase
+            if (supabaseClient) {
+              try {
+                const { data: authData, error: authErr } = await supabaseClient.auth.signUp({
+                  email: email,
+                  password: pwd,
+                  options: {
+                    data: {
+                      full_name: `${prenom} ${nom}`.trim(),
+                      prenom: escapeHTML(prenom),
+                      nom: escapeHTML(nom)
+                    },
+                    emailRedirectTo: window.location.origin + '/dashboard.html'
+                  }
+                });
+
+                if (authErr) {
+                  const errStr = (authErr.message || '').toLowerCase();
+                  if (errStr.includes('already registered') || errStr.includes('already exists')) {
+                    showFieldError('email', 'Cette adresse e-mail est déjà associée à un compte.');
+                    authAlert.style.display = 'flex';
+                    authAlert.style.background = '';
+                    authAlert.style.borderColor = '';
+                    authAlert.style.color = '';
+                    authAlertText.innerHTML = `<strong>Compte existant :</strong> Cette adresse e-mail est déjà enregistrée. <button type="button" onclick="document.getElementById('btn-switch-mode').click()" style="background:none;border:none;color:inherit;text-decoration:underline;cursor:pointer;font-weight:700;margin-left:5px;">Connectez-vous ↗</button>`;
+                    submitBtn.disabled = false;
+                    btnSubmitText.textContent = 'Créer mon compte';
+                    return;
+                  } else {
+                    authAlert.style.display = 'flex';
+                    authAlert.style.background = '';
+                    authAlert.style.borderColor = '';
+                    authAlert.style.color = '';
+                    authAlertText.textContent = authErr.message;
+                    submitBtn.disabled = false;
+                    btnSubmitText.textContent = 'Créer mon compte';
+                    return;
+                  }
+                }
+
+                if (authData?.user) {
+                  // Vérification si Supabase requiert la confirmation d'e-mail (session absente)
+                  if (!authData.session) {
+                    emailConfirmationNeeded = true;
+                  }
+
+                  registeredUser = {
+                    id: authData.user.id,
+                    prenom: escapeHTML(prenom),
+                    nom: escapeHTML(nom),
+                    email: email,
+                    createdAt: Date.now()
+                  };
+
+                  // Création immédiate du profil et de la boutique dans Supabase si session immédiate
+                  if (authData.session) {
+                    const storeSlug = (prenom || 'boutique').toLowerCase().replace(/[^a-z0-9]/g, '') || 'boutique';
+                    try {
+                      await supabaseClient.from('profiles').upsert({
+                        id: authData.user.id,
+                        email: email,
+                        full_name: `${prenom} ${nom}`.trim()
+                      });
+                      await supabaseClient.from('stores').insert({
+                        owner_id: authData.user.id,
+                        name: `Boutique de ${escapeHTML(prenom)}`,
+                        slug: `${storeSlug}-${authData.user.id.slice(0, 5)}`,
+                        currency: 'XOF',
+                        country: 'Sénégal',
+                        plan: 'starter'
+                      });
+                      localStorage.setItem('sakbi_store_name', `Boutique de ${escapeHTML(prenom)}`);
+                    } catch(dbErr) {
+                      console.warn('Sync tables Supabase:', dbErr);
+                    }
+                  }
+                }
+              } catch(sbErr) {
+                console.warn('Erreur appel Supabase Auth:', sbErr);
+              }
+            }
+
+            // Hachage cryptographique et sauvegarde locale (sécurité miroir)
+            const salt = generateSalt();
+            const passwordHash = await hashPassword(pwd, salt);
+            const newUser = registeredUser || {
+              prenom: escapeHTML(prenom),
+              nom: escapeHTML(nom),
+              email: email,
+              salt: salt,
+              passwordHash: passwordHash,
+              createdAt: Date.now()
+            };
+
+            saveUser({ ...newUser, salt, passwordHash });
+            resetRateLimit();
+
+            // Si un e-mail de confirmation a été envoyé par Supabase
+            if (emailConfirmationNeeded) {
+              submitBtn.disabled = false;
+              btnSubmitText.textContent = 'Créer mon compte';
+
+              if (window.confetti) {
+                window.confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+              }
+
+              authAlert.style.display = 'flex';
+              authAlert.style.background = '#ECFDF5';
+              authAlert.style.borderColor = '#10B981';
+              authAlert.style.color = '#065F46';
+              authAlertText.innerHTML = `
+                <div style="font-size:0.92rem; line-height:1.5;">
+                  <strong style="display:block; font-size:1rem; margin-bottom:4px; color:#047857;">📬 E-mail de confirmation envoyé !</strong>
+                  Un lien d'activation a été envoyé à <strong>${escapeHTML(email)}</strong>.<br />
+                  Veuillez vérifier votre boîte de réception pour valider votre boutique Logicom, puis connectez-vous.
+                  <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <button type="button" id="btn-enter-now-alert" style="background:#047857; color:#FFFFFF; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.85rem;">
+                      Accéder au dashboard directement ↗
+                    </button>
+                    <button type="button" id="btn-goto-login-alert" style="background:#234635; color:#FFFFFF; border:none; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.85rem;">
+                      Se connecter ↗
+                    </button>
+                    <button type="button" id="btn-resend-alert" style="background:#FFFFFF; color:#047857; border:1px solid #10B981; padding:6px 14px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.85rem;">
+                      Renvoyer l'e-mail
+                    </button>
+                  </div>
+                </div>
+              `;
+
+              document.getElementById('btn-enter-now-alert')?.addEventListener('click', () => {
+                createAuthSession(newUser);
+                window.location.href = './dashboard.html';
+              });
+
+              document.getElementById('btn-goto-login-alert')?.addEventListener('click', () => {
+                switchMode('login');
+                authAlert.style.display = 'none';
+              });
+
+              document.getElementById('btn-resend-alert')?.addEventListener('click', async (ev) => {
+                const btn = ev.currentTarget;
+                btn.disabled = true;
+                btn.textContent = 'Envoi en cours...';
+                try {
+                  if (supabaseClient) {
+                    await supabaseClient.auth.resend({ type: 'signup', email: email });
+                  }
+                  showToast('📬 Nouvel e-mail envoyé ! Vérifiez votre boîte mail.');
+                  btn.textContent = '✓ Renvoyé !';
+                } catch(resendErr) {
+                  showToast('Erreur lors du renvoi.');
+                  btn.disabled = false;
+                  btn.textContent = 'Réessayer';
+                }
+              });
+
+              showToast(`📬 E-mail de confirmation envoyé à ${escapeHTML(email)} !`);
+              return;
+            }
+
+            createAuthSession(newUser);
+            showToast(`🎉 Compte créé avec succès ! Bienvenue, ${escapeHTML(prenom)}.`);
+            setTimeout(() => {
+              window.location.href = './dashboard.html';
+            }, 850);
+          } catch(err) {
+            console.error('Erreur inscription:', err);
+            authAlert.style.display = 'flex';
+            authAlertText.textContent = 'Une erreur inattendue est survenue. Veuillez réessayer.';
+            submitBtn.disabled = false;
+            btnSubmitText.textContent = 'Créer mon compte';
+          }
+
+        // ================= MODE CONNEXION =================
+        } else {
+          if (!pwd) {
+            showFieldError('password', 'Veuillez saisir votre mot de passe.');
+            pwdInput.focus();
+            return;
+          }
+
+          submitBtn.disabled = true;
+          btnSubmitText.textContent = 'Vérification en cours...';
+
+          let signedIn = false;
+
+          // 1. Tentative d'authentification Supabase Cloud
+          if (supabaseClient) {
+            try {
+              const { data: signInData, error: signInErr } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: pwd
+              });
+
+              if (signInErr) {
+                const errMsg = (signInErr.message || '').toLowerCase();
+                if (errMsg.includes('email not confirmed')) {
+                  authAlert.style.display = 'flex';
+                  authAlert.style.background = '#FEF3C7';
+                  authAlert.style.borderColor = '#F59E0B';
+                  authAlert.style.color = '#92400E';
+                  authAlertText.innerHTML = `
+                    <div style="font-size:0.92rem; line-height:1.5;">
+                      <strong style="display:block; font-size:1rem; margin-bottom:4px; color:#B45309;">⚠️ E-mail non encore confirmé</strong>
+                      Veuillez cliquer sur le lien d'activation envoyé à <strong>${escapeHTML(email)}</strong>.<br />
+                      <button type="button" id="btn-resend-signin" style="background:#B45309; color:#FFFFFF; border:none; padding:5px 12px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.82rem; margin-top:8px;">
+                        Renvoyer l'e-mail de confirmation
+                      </button>
+                      <button type="button" id="btn-signin-demo" style="background:#234635; color:#FFFFFF; border:none; padding:5px 12px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.82rem; margin-top:8px; margin-left:8px;">
+                        Entrer en mode Démo ↗
+                      </button>
+                    </div>
+                  `;
+                  document.getElementById('btn-signin-demo')?.addEventListener('click', () => {
+                    window.location.href = './dashboard.html?demo=true';
+                  });
+                  document.getElementById('btn-resend-signin')?.addEventListener('click', async (ev) => {
+                    const btn = ev.currentTarget;
+                    btn.disabled = true;
+                    btn.textContent = 'Envoi...';
+                    try {
+                      await supabaseClient.auth.resend({ type: 'signup', email: email });
+                      showToast('📬 Nouvel e-mail envoyé avec succès !');
+                      btn.textContent = '✓ E-mail renvoyé !';
+                    } catch(e) {
+                      showToast('Erreur lors du renvoi.');
+                      btn.disabled = false;
+                      btn.textContent = 'Réessayer';
+                    }
+                  });
+                  submitBtn.disabled = false;
+                  btnSubmitText.textContent = 'Se connecter à mon compte';
+                  return;
+                }
+              } else if (signInData?.user) {
+                signedIn = true;
+                resetRateLimit();
+                const meta = signInData.user.user_metadata || {};
+                const loggedUser = {
+                  id: signInData.user.id,
+                  prenom: meta.prenom || meta.full_name?.split(' ')[0] || 'Marchand',
+                  nom: meta.nom || meta.full_name?.split(' ')[1] || '',
+                  email: email
+                };
+                createAuthSession(loggedUser);
+                showToast(`👋 Heureux de vous revoir, ${loggedUser.prenom} ! Connexion réussie.`);
+                setTimeout(() => {
+                  window.location.href = './dashboard.html';
+                }, 750);
+                return;
+              }
+            } catch(e) {
+              console.warn('Tentative Supabase Cloud échouée, vérification locale:', e);
+            }
+          }
+
+          // 2. Repli / Vérification locale par hachage SHA-256
+          const users = getStoredUsers();
+          const user = users[email];
+
+          if (!user && !signedIn) {
+            registerFailedAttempt();
+            const lockState = checkRateLimit();
+            if (lockState.isLocked) {
+              handleRateLock(lockState.remaining);
+            } else {
+              authAlert.style.display = 'flex';
+              authAlert.style.background = '';
+              authAlert.style.borderColor = '';
+              authAlert.style.color = '';
+              authAlertText.textContent = 'Identifiants invalides. Aucun compte trouvé avec cette adresse e-mail.';
+              submitBtn.disabled = false;
+              btnSubmitText.textContent = 'Se connecter à mon compte';
+            }
+            return;
+          }
+
+          if (user) {
+            const computedHash = await hashPassword(pwd, user.salt);
+            if (computedHash !== user.passwordHash) {
+              registerFailedAttempt();
+              const lockState = checkRateLimit();
+              if (lockState.isLocked) {
+                handleRateLock(lockState.remaining);
+              } else {
+                authAlert.style.display = 'flex';
+                authAlert.style.background = '';
+                authAlert.style.borderColor = '';
+                authAlert.style.color = '';
+                authAlertText.textContent = 'Mot de passe incorrect. Veuillez vérifier votre saisie.';
+                showFieldError('password', 'Mot de passe incorrect.');
+                submitBtn.disabled = false;
+                btnSubmitText.textContent = 'Se connecter à mon compte';
+              }
+              return;
+            }
+
+            resetRateLimit();
+            createAuthSession(user);
+            showToast(`👋 Heureux de vous revoir, ${user.prenom} ! Connexion réussie.`);
+            setTimeout(() => {
+              window.location.href = './dashboard.html';
+            }, 750);
+          }
+        }
+      });
+    }
+
+    // 10. URL Query Param Detection (Notifications d'Auth)
+    (function handleUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('auth_required') === 'true') {
+        switchMode('login');
+        authAlert.style.display = 'flex';
+        authAlertText.innerHTML = `<strong>Accès protégé :</strong> Veuillez vous connecter ou créer un compte pour accéder au tableau de bord.`;
+      } else if (urlParams.get('session_expired') === 'true') {
+        switchMode('login');
+        authAlert.style.display = 'flex';
+        authAlertText.innerHTML = `<strong>Session expirée :</strong> Votre session a expiré. Veuillez vous reconnecter.`;
+      } else if (urlParams.get('logged_out') === 'true') {
+        switchMode('login');
+        showToast('✓ Vous avez été déconnecté avec succès.');
+      }
+    })();
+  </script>
+</body>
+</html>

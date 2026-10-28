@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Logicom • Logo Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      background: #F3F4F6;
+    }
+    .box {
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .box-white {
+      background: #FFFFFF;
+    }
+    .box-cream {
+      background: #FAF9F5;
+      border: 1px solid #E8E6DC;
+    }
+    .box-dark {
+      background: #0A1931;
+    }
+    .title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #64748B;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Box 1: Reference de l'image originale fournie par l'utilisateur -->
+  <div class="box box-dark">
+    <span class="title" style="color:#94A3B8;">1. Image Originale Fournie par l'Utilisateur</span>
+    <img src="/.gemini/antigravity-ide/brain/b5017ac1-bd73-414b-82c8-04e74718974d/.user_uploaded/media_1793042217140.png" style="max-height: 180px; border-radius: 12px;" alt="Source">
+  </div>
+
+  <!-- Box 2: Fond Blanc (Demande explicite audio 3: "avec le fond blanc") -->
+  <div class="box box-white">
+    <span class="title">2. Version Fond Blanc (Pour barre de navigation, sidebar, factures)</span>
+    <img src="/logicom-logo.svg" alt="Logicom Logo Fond Blanc" style="height: 60px; width: auto;" />
+  </div>
+
+  <!-- Box 3: Fond Crème (Design system actuel Sakbi/Logicom #FAF9F5) -->
+  <div class="box box-cream">
+    <span class="title">3. Version Fond Crème Sakbi / Logicom (#FAF9F5)</span>
+    <img src="/logicom-logo.svg" alt="Logicom Logo Fond Crème" style="height: 60px; width: auto;" />
+  </div>
+
+  <!-- Box 4: Fond Sombre (Identique à la capture originale) -->
+  <div class="box box-dark">
+    <span class="title" style="color:#94A3B8;">4. Version Fond Sombre (Hero banners, Footer)</span>
+    <img src="/logicom-logo-dark.svg" alt="Logicom Logo Fond Sombre" style="height: 60px; width: auto;" />
+  </div>
+
+  <!-- Box 5: Icone compacte -->
+  <div class="box box-white">
+    <span class="title">5. Icône Compacte (Menu réduit & Favicon)</span>
+    <img src="/logicom-icon.svg" alt="Logicom Icon" style="height: 40px; width: auto;" />
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Montre De Luxe Pour Hommes Langlishi • Logicom Store</title>
+  <meta name="description" content="Commandez en ligne avec livraison express et paiement à la livraison." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* ========================================================
+       E-COMMERCE PRODUCT SALES PAGE (Exact Reference Replica)
+       ======================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary-blue: #2563EB;
+      --primary-blue-hover: #1D4ED8;
+      --accent-dark: #111827;
+      --accent-green: #16A34A;
+      --bg-body: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border-color: #E2E8F0;
+      --border-blue: #BFDBFE;
+      --bg-summary: #EFF6FF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-subtle: #94A3B8;
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* Top Announcement Bar (Exact Blue from Screenshot) */
+    .top-announcement-bar {
+      background-color: var(--primary-blue);
+      color: #FFFFFF;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 0.65rem 1rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* Store Navigation */
+    .store-navbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .store-nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .store-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .store-brand .dot {
+      color: var(--primary-blue);
+    }
+
+    .store-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .store-nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .store-nav-link:hover {
+      color: var(--text-main);
+    }
+
+    .store-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .btn-nav-icon {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0.3rem;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-nav-icon:hover {
+      background: #F1F5F9;
+    }
+
+    .cart-badge-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-dashboard-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #F1F5F9;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .back-dashboard-pill:hover {
+      background: #E2E8F0;
+      color: var(--text-main);
+    }
+
+    /* Main Container */
+    .product-page-main {
+      max-width: 1240px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Two-Column Grid */
+    .product-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    /* ========================================================
+       LEFT COLUMN: IMAGE GALLERY CAROUSEL
+       ======================================================== */
+    .product-gallery-card {
+      position: sticky;
+      top: 5rem;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1.2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gallery-main-viewport {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-main-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease, opacity 0.2s ease;
+    }
+
+    .gallery-main-img:hover {
+      transform: scale(1.03);
+    }
+
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.7);
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .gallery-nav-btn:hover {
+      background: rgba(17, 24, 39, 0.95);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .gallery-nav-btn.prev {
+      left: 14px;
+    }
+
+    .gallery-nav-btn.next {
+      right: 14px;
+    }
+
+    .gallery-counter-badge {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Thumbnail Strip */
+    .gallery-thumbs-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.3rem;
+    }
+
+    .thumb-item {
+      width: 76px;
+      height: 76px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #F1F5F9;
+      opacity: 0.65;
+      transition: all 0.2s ease;
+    }
+
+    .thumb-item:hover {
+      opacity: 1;
+    }
+
+    .thumb-item.active {
+      border-color: var(--primary-blue);
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ========================================================
+       RIGHT COLUMN: PRODUCT DETAILS & FORM
+       ======================================================== */
+    .product-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .product-header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .product-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-category {
+      background: #F1F5F9;
+      color: #334155;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-stock {
+      background: #DCFCE7;
+      color: #15803D;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .badge-stock .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #16A34A;
+    }
+
+    .product-main-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .product-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .stars-icon-group {
+      color: #F59E0B;
+      display: flex;
+      gap: 2px;
+    }
+
+    .verified-buyer-tag {
+      color: var(--accent-green);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Price Section */
+    .product-price-section {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .price-current {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      letter-spacing: -0.03em;
+    }
+
+    .price-compare {
+      font-size: 1.2rem;
+      color: var(--text-subtle);
+      text-decoration: line-through;
+      font-family: var(--font-mono);
+    }
+
+    .price-saving-badge {
+      background: #FEE2E2;
+      color: #DC2626;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    /* Quantity Selector */
+    .quantity-control-group {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .quantity-label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .quantity-picker {
+      display: inline-flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qty-btn {
+      width: 42px;
+      height: 40px;
+      background: #FFFFFF;
+      border: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: #F1F5F9;
+    }
+
+    .qty-input {
+      width: 48px;
+      height: 40px;
+      border: none;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      -moz-appearance: textfield;
+    }
+
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* ========================================================
+       ORDER SUMMARY (Exact Style from Screenshot 3)
+       ======================================================== */
+    .order-summary-box {
+      background: var(--bg-summary);
+      border: 1px solid var(--border-blue);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .summary-heading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .summary-item-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      gap: 1rem;
+    }
+
+    .summary-item-title {
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .summary-item-qty-price {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--text-main);
+    }
+
+    .summary-divider {
+      height: 1px;
+      background: var(--border-blue);
+      margin: 0.2rem 0;
+    }
+
+    .summary-total-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-total-label {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .summary-total-amount {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      font-family: var(--font-mono);
+    }
+
+    /* ========================================================
+       CASH ON DELIVERY ORDER FORM (Exact Style from Screenshot 4)
+       ======================================================== */
+    .cod-order-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.6rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .cod-card-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cod-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: -0.5rem;
+    }
+
+    .cod-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .cod-form-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .cod-form-label .req {
+      color: #DC2626;
+    }
+
+    .cod-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .cod-input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-subtle);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cod-input-text {
+      width: 100%;
+      height: 48px;
+      padding: 0 1rem 0 2.85rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: var(--font-main);
+      color: var(--text-main);
+      background: #FFFFFF;
+      transition: all 0.15s ease;
+    }
+
+    .cod-input-text:focus {
+      outline: none;
+      border-color: var(--text-main);
+      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+    }
+
+    .cod-input-textarea {
+      width: 100%;
+      min-height: 84px;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: var(--font-main);
+      color: var(--text-main);
+      background: #FFFFFF;
+      resize: vertical;
+      transition: all 0.15s ease;
+    }
+
+    .cod-input-textarea:focus {
+      outline: none;
+      border-color: var(--text-main);
+      box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+    }
+
+    /* Big Black CTA Button (Exact from Screenshot 4) */
+    .btn-submit-order {
+      width: 100%;
+      height: 52px;
+      background: #000000;
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-submit-order:hover {
+      background: #1F2937;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .btn-submit-order:active {
+      transform: translateY(0);
+    }
+
+    /* Security Trust Badges */
+    .cod-trust-badges {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding-top: 0.6rem;
+      border-top: 1px dashed var(--border-color);
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ========================================================
+       BELOW THE FOLD: RICH SALES PAGE LANDING COPY
+       (Exact Style from Screenshots 5 & 6)
+       ======================================================== */
+    .product-story-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .story-hero-header {
+      width: 100%;
+      margin: 0 0 0.5rem 0;
+      text-align: left;
+    }
+
+    .story-main-headline {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1E293B;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      margin: 0;
+      text-align: left;
+    }
+
+    .story-banner-wrapper {
+      width: 100%;
+      margin: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+    }
+
+    .story-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 480px;
+      object-fit: cover;
+    }
+
+    .story-content-body {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      text-align: left;
+    }
+
+    .story-paragraph {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #334155;
+      text-align: left;
+      margin: 0;
+    }
+
+    .story-subheadline {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0F172A;
+      text-align: left;
+      letter-spacing: -0.02em;
+      margin-top: 0.5rem;
+    }
+
+    .story-content-body img,
+    .story-paragraph img {
+      display: block !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Store Footer */
+    .store-footer {
+      margin-top: 5rem;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 1.5rem 2rem 1.5rem;
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+      text-align: center;
+    }
+
+    .footer-guarantees-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-guarantee-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Floating Mobile Order Bar */
+    .mobile-floating-cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      padding: 0.85rem 1.25rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+      z-index: 99;
+    }
+
+    .mobile-cta-price-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-cta-label {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      font-weight: 600;
+    }
+
+    .mobile-cta-amount {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    .btn-mobile-order-now {
+      background: #000000;
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Modal Confirmation Order */
+    .modal-backdrop-confirmation {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop-confirmation.open {
+      display: flex;
+    }
+
+    .modal-confirmation-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .success-celebration-badge {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #DCFCE7;
+      color: #16A34A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: 2.2rem;
+    }
+
+    .btn-whatsapp-confirm {
+      background: #25D366;
+      color: #FFFFFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1.4rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .btn-whatsapp-confirm:hover {
+      background: #1EBE5B;
+    }
+
+    .btn-close-confirm {
+      background: #F1F5F9;
+      color: var(--text-muted);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .product-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .gallery-main-viewport {
+        height: 380px;
+      }
+      .product-main-title {
+        font-size: 1.55rem;
+      }
+      .story-main-headline {
+        font-size: 1.7rem;
+      }
+      .story-subheadline {
+        font-size: 1.4rem;
+      }
+      .mobile-floating-cta-bar {
+        display: flex;
+      }
+    }
+
+    /* Styles pour la description e-commerce enrichie */
+    .desc-hero-banner {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      border: 1px solid #E5E7EB;
+    }
+    .desc-hero-banner img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .desc-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.2rem 1.5rem;
+      background: linear-gradient(to top, rgba(17, 24, 39, 0.92) 0%, rgba(17, 24, 39, 0.45) 75%, transparent 100%);
+      color: #FFFFFF;
+    }
+    .desc-hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #86EFAC;
+      background: rgba(22, 101, 52, 0.5);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-bottom: 0.35rem;
+    }
+    .desc-hero-headline {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.3;
+      margin: 0;
+    }
+    .desc-slider-container {
+      margin: 1.5rem 0;
+      background: #FAFBF9;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 1rem 1.15rem;
+    }
+    .desc-slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .desc-slider-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #1F2937;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .desc-slider-hint {
+      font-size: 0.76rem;
+      color: #4B5563;
+      background: #E5E7EB;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .desc-slider-track {
+      display: flex;
+      gap: 0.85rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 0.65rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #8FA693 #F3F4F6;
+    }
+    .desc-slider-track::-webkit-scrollbar {
+      height: 7px;
+    }
+    .desc-slider-track::-webkit-scrollbar-thumb {
+      background: #8FA693;
+      border-radius: 8px;
+    }
+    .desc-slider-item {
+      flex: 0 0 210px;
+      scroll-snap-align: start;
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+      user-select: none;
+    }
+    .desc-slider-item img {
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      display: block;
+    }
+    .desc-slider-caption {
+      padding: 0.55rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #374151;
+      text-align: center;
+      background: #FAFAFA;
+      border-top: 1px solid #F3F4F6;
+    }
+    .desc-feature-block {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      margin: 1.5rem 0;
+      padding: 1.15rem 1.25rem;
+      background: #FAFAF8;
+      border: 1px solid #E8ECE6;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+    .desc-feature-block.reverse {
+      flex-direction: row-reverse;
+      background: #FFFFFF;
+      border-color: #E5E7EB;
+    }
+    @media (max-width: 680px) {
+      .desc-feature-block, .desc-feature-block.reverse {
+        flex-direction: column !important;
+        text-align: left;
+      }
+    }
+    .desc-feature-img-wrap {
+      flex: 0 0 220px;
+      max-width: 220px;
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    @media (max-width: 680px) {
+      .desc-feature-img-wrap {
+        flex: 0 0 auto;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+    .desc-feature-img-wrap img {
+      width: 100%;
+      height: 165px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+    .desc-feature-img-wrap:hover img {
+      transform: scale(1.04);
+    }
+    .desc-feature-content {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .desc-feature-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #166534;
+      background: #DCFCE7;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      margin-bottom: 0.35rem;
+    }
+    .desc-feature-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+    }
+    .desc-feature-text {
+      font-size: 0.89rem;
+      color: #4B5563;
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+    }
+    .desc-feature-list {
+      margin: 0.35rem 0 0 1.1rem;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+    .desc-feature-list li {
+      margin-bottom: 0.22rem;
+      line-height: 1.45;
+    }
+    .desc-specs-card {
+      margin: 1.6rem 0;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .desc-specs-header {
+      background: #234635;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .desc-specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 0;
+    }
+    .desc-specs-table tr {
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .desc-specs-table tr:last-child {
+      border-bottom: none;
+    }
+    .desc-specs-table tr:nth-child(even) {
+      background: #F9FAFB;
+    }
+    .desc-specs-table td {
+      padding: 0.65rem 1.15rem;
+      border: none;
+    }
+    .desc-specs-table td.spec-name {
+      font-weight: 600;
+      color: #1F2937;
+      width: 38%;
+      border-right: 1px solid #E5E7EB;
+    }
+    .desc-specs-table td.spec-val {
+      color: #4B5563;
+    }
+    .desc-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 1.6rem 0 0.85rem;
+    }
+    @media (max-width: 580px) {
+      .desc-trust-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .desc-trust-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 0.85rem 0.9rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+    .desc-trust-icon {
+      font-size: 1.35rem;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    .desc-trust-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.15rem;
+    }
+    .desc-trust-desc {
+      font-size: 0.75rem;
+      color: #6B7280;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Store Header / Navbar -->
+  <header class="store-navbar">
+    <div class="store-nav-container">
+      <nav class="store-nav-links">
+        <a href="#commande-form" class="store-nav-link">Commander</a>
+        <a href="#description-section" class="store-nav-link">Détails</a>
+      </nav>
+
+      <div class="store-nav-actions">
+        <button class="btn-nav-icon" title="Panier" onclick="document.getElementById('commande-form').scrollIntoView({behavior:'smooth'})">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge-count" id="nav-cart-count">1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Product Page Main Content -->
+  <main class="product-page-main">
+    <div class="product-hero-grid">
+
+      <!-- LEFT COLUMN: Image Gallery Carousel -->
+      <div class="product-gallery-card">
+        <div class="gallery-main-viewport">
+          <img id="gallery-active-image" class="gallery-main-img" src="https://images.unsplash.com/photo-1608248597359-322194957e84?auto=format&fit=crop&w=1000&q=80" alt="Produit" />
+          
+          <button class="gallery-nav-btn prev" type="button" onclick="navigateGallery(-1)" aria-label="Image précédente">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button class="gallery-nav-btn next" type="button" onclick="navigateGallery(1)" aria-label="Image suivante">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="gallery-counter-badge" id="gallery-counter">1 / 4</div>
+        </div>
+
+        <!-- Thumbnails Row -->
+        <div class="gallery-thumbs-row" id="gallery-thumbs-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Purchase Details & COD Order Form -->
+      <div class="product-info-col">
+        
+        <div class="product-header-meta">
+          <div class="product-badges-row">
+            <span class="badge-category" id="prod-category">Accessoires</span>
+            <span class="badge-stock">
+              <span class="dot"></span> En stock - Expédié sous 24h
+            </span>
+          </div>
+
+          <h1 class="product-main-title" id="prod-title">
+            Montre De Luxe Pour Hommes Langlishi - Cadran Rotatif & Acier Inoxydable
+          </h1>
+
+          <div class="product-rating-row">
+            <div class="stars-icon-group">
+              ★★★★★
+            </div>
+            <span><strong>4.9</strong> (128 avis clients)</span>
+            <span style="color:#CBD5E1;">•</span>
+            <span class="verified-buyer-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Avis vérifiés
+            </span>
+          </div>
+        </div>
+
+        <!-- Price Section -->
+        <div class="product-price-section">
+          <span class="price-current" id="prod-price-display">25 000 FCFA</span>
+          <span class="price-compare" id="prod-compare-display">35 000 FCFA</span>
+          <span class="price-saving-badge" id="prod-saving-badge">-29% ÉCONOMIE</span>
+        </div>
+
+        <!-- Quantity Picker -->
+        <div class="quantity-control-group">
+          <span class="quantity-label">Quantité</span>
+          <div class="quantity-picker">
+            <button type="button" class="qty-btn" onclick="adjustQuantity(-1)">−</button>
+            <input type="number" id="order-qty-input" class="qty-input" value="1" min="1" max="99" onchange="updateSummary()" />
+            <button type="button" class="qty-btn" onclick="adjustQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <!-- Order Summary Box (Screenshot 3) -->
+        <div class="order-summary-box">
+          <div class="summary-heading">Résumé de la commande</div>
+          <div class="summary-item-line">
+            <span class="summary-item-title" id="summary-prod-name">Montre De Luxe Pour Hommes Langlishi - Cadran Rotatif & Acier Inoxydable</span>
+            <span class="summary-item-qty-price" id="summary-qty-price">1 × 25 000 FCFA</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-total-line">
+            <span class="summary-total-label">Total</span>
+            <span class="summary-total-amount" id="summary-total-amount">25 000 FCFA</span>
+          </div>
+        </div>
+
+        <!-- Cash on Delivery Form (Screenshot 4) -->
+        <form class="cod-order-card" id="commande-form" onsubmit="handleOrderSubmit(event)">
+          <div>
+            <h2 class="cod-card-title">Formulaire de commande</h2>
+            <p class="cod-card-subtitle">Paiement en espèces à la livraison. Remplissez simplement les détails ci-dessous :</p>
+          </div>
+
+          <!-- Nom Complet -->
+          <div class="cod-form-group">
+            <label class="cod-form-label" for="client-name">Nom complet <span class="req">*</span></label>
+            <div class="cod-input-wrapper">
+              <span class="cod-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </span>
+              <input type="text" id="client-name" class="cod-input-text" placeholder="Entrez votre nom complet" required />
+            </div>
+          </div>
+
+          <!-- Numéro de Téléphone -->
+          <div class="cod-form-group">
+            <label class="cod-form-label" for="client-phone">Numéro de téléphone <span class="req">*</span></label>
+            <div class="cod-input-wrapper">
+              <span class="cod-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </span>
+              <input type="tel" id="client-phone" class="cod-input-text" placeholder="0555 12 34 56 ou +225..." required />
+            </div>
+          </div>
+
+          <!-- Ville -->
+          <div class="cod-form-group">
+            <label class="cod-form-label" for="client-city">Ville <span class="req">*</span></label>
+            <div class="cod-input-wrapper">
+              <span class="cod-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </span>
+              <input type="text" id="client-city" class="cod-input-text" placeholder="Entrez votre ville" required />
+            </div>
+          </div>
+
+          <!-- Notes Supplémentaires -->
+          <div class="cod-form-group">
+            <label class="cod-form-label" for="client-notes">Notes supplémentaires</label>
+            <textarea id="client-notes" class="cod-input-textarea" placeholder="Instructions ou notes de livraison (facultatif)"></textarea>
+          </div>
+
+          <!-- Commander CTA -->
+          <button type="submit" class="btn-submit-order">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Commander
+          </button>
+
+          <!-- Reassurance Badges -->
+          <div class="cod-trust-badges">
+            <div class="trust-badge-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              Paiement à la livraison
+            </div>
+            <div class="trust-badge-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+              Livraison Rapide 24-48h
+            </div>
+            <div class="trust-badge-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Garantie Satisfait
+            </div>
+          </div>
+        </form>
+
+        <!-- 4. SALES COPY & RICH STORY (Aligned in Right Column with Order Form) -->
+        <section class="product-story-section" id="description-section">
+          <div class="story-hero-header">
+            <h2 class="story-main-headline" id="story-headline">
+              L'Alliance Parfaite Entre Audace Mécanique et Prestige d'Affaires
+            </h2>
+          </div>
+
+          <!-- Story Banner Image -->
+          <div class="story-banner-wrapper">
+            <img id="story-banner-image" class="story-banner-img" src="/images/watch_langlishi.png" alt="Montre De Luxe Pour Hommes Langlishi" />
+          </div>
+
+          <div class="story-content-body">
+            <p class="story-paragraph" id="story-paragraph-1">
+              Trop souvent, les montres masculines imposent un compromis frustrant : soit un style classique manquant d'originalité, soit une montre sportive sans distinction professionnelle. Cette montre de luxe pour homme redéfinit les codes horlogers en combinant un mouvement à pointeur rotatif spectaculaire, une robustesse étanche éprouvée et une finition luxueuse en acier inoxydable. Plus qu'un simple instrument de mesure du temps, elle devient la signature visuelle de votre ambition. Commandez la vôtre dès aujourd'hui et imposez votre style avec assurance.
+            </p>
+
+            <h3 class="story-subheadline" id="story-subheadline">
+              Cadran Rotatif Unique au Design Révolutionnaire
+            </h3>
+
+            <p class="story-paragraph" id="story-paragraph-2">
+              Démarquez-vous avec un cadran rotatif novateur et avant-gardiste. Conçu avec une précision d'horlogerie moderne, ce mécanisme dynamique attire instantanément les regards et apporte une touche d'originalité captivante à votre poignet.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Store Footer -->
+  <footer class="store-footer">
+    <div class="footer-container">
+      <div class="footer-guarantees-row">
+        <div class="footer-guarantee-pill">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          Livraison Express Partout
+        </div>
+        <div class="footer-guarantee-pill">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Paiement Cash à la Réception
+        </div>
+        <div class="footer-guarantee-pill">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Support WhatsApp 7j/7
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-subtle);">
+        &copy; 2026 Boutique en ligne • Tous droits réservés.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Mobile CTA Bar -->
+  <div class="mobile-floating-cta-bar">
+    <div class="mobile-cta-price-col">
+      <span class="mobile-cta-label">Total :</span>
+      <span class="mobile-cta-amount" id="mobile-bar-price">12 500 FCFA</span>
+    </div>
+    <button type="button" class="btn-mobile-order-now" onclick="document.getElementById('commande-form').scrollIntoView({behavior:'smooth'})">
+      Commander maintenant
+    </button>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div class="modal-backdrop-confirmation" id="order-success-modal">
+    <div class="modal-confirmation-card">
+      <div class="success-celebration-badge">✓</div>
+      <h3 style="font-size:1.6rem; font-weight:800; color:#0F172A; margin:0;">Commande enregistrée !</h3>
+      <p style="font-size:0.95rem; color:#475569; margin:0;">
+        Merci <strong id="confirm-client-name">Cher Client</strong> ! Votre commande <strong id="confirm-order-id" style="font-family:var(--font-mono); color:#2563EB;">#CMD-9821</strong> a bien été prise en compte.
+      </p>
+
+      <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:1.2rem; text-align:left; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem;">
+        <div><strong>Article :</strong> <span id="confirm-product-name">Montre De Luxe Langlishi</span></div>
+        <div><strong>Quantité :</strong> <span id="confirm-quantity">1</span></div>
+        <div><strong>Total à payer :</strong> <span id="confirm-total-amount" style="font-weight:800; color:#16A34A; font-family:var(--font-mono);">25 000 FCFA</span></div>
+        <div><strong>Mode de règlement :</strong> 💵 Espèces à la livraison</div>
+        <div><strong>Livraison à :</strong> <span id="confirm-city">Dakar</span></div>
+      </div>
+
+      <p style="font-size:0.85rem; color:#64748B;">
+        Notre équipe logistique vous contactera par téléphone au <strong id="confirm-phone">+221...</strong> pour convenir de l'heure exacte de livraison.
+      </p>
+
+      <a id="btn-whatsapp-link" href="#" target="_blank" class="btn-whatsapp-confirm">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.303c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/>
+        </svg>
+        Confirmer rapidement sur WhatsApp
+      </a>
+
+      <button type="button" class="btn-close-confirm" onclick="closeSuccessModal()">
+        Continuer mes achats
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Product Catalog Database
+    const productCatalog = {
+      p0: {
+        id: 'p0',
+        title: 'Montre De Luxe Pour Hommes Langlishi - Cadran Rotatif & Acier Inoxydable',
+        category: 'Accessoires',
+        price: 25000,
+        comparePrice: 35000,
+        images: [
+          '/images/watch_langlishi.png',
+          'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: "L'Alliance Parfaite Entre Audace Mécanique et Prestige d'Affaires",
+        storyParagraph1: "Trop souvent, les montres masculines imposent un compromis frustrant : soit un style classique manquant d'originalité, soit une montre sportive sans distinction professionnelle. Cette montre de luxe pour homme redéfinit les codes horlogers en combinant un mouvement à pointeur rotatif spectaculaire, une robustesse étanche éprouvée et une finition luxueuse en acier inoxydable. Plus qu'un simple instrument de mesure du temps, elle devient la signature visuelle de votre ambition. Commandez la vôtre dès aujourd'hui et imposez votre style avec assurance.",
+        storySubheadline: 'Cadran Rotatif Unique au Design Révolutionnaire',
+        storyParagraph2: "Démarquez-vous avec un cadran rotatif novateur et avant-gardiste. Conçu avec une précision d'horlogerie moderne, ce mécanisme dynamique attire instantanément les regards et apporte une touche d'originalité captivante à votre poignet.",
+        storyBanner: '/images/watch_langlishi.png'
+      },
+      p1: {
+        id: 'p1',
+        title: 'Montre Élégance Quartz Cuir Véritable',
+        category: 'Chaussures & Montres',
+        price: 13400,
+        comparePrice: 16000,
+        images: [
+          'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: 'Montre Quartz Minimaliste Homme Cuir Étanche Sport Luxe',
+        storyParagraph1: `<div class="desc-hero-banner">
+  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&q=80" alt="Montre Quartz Minimaliste de Luxe" />
+  <div class="desc-hero-overlay">
+    <span class="desc-hero-tag">ÉDITION LIMITÉE • QUALITÉ SUPÉRIEURE</span>
+    <h2 class="desc-hero-headline">Montre Quartz Minimaliste Homme Cuir Étanche Sport Luxe</h2>
+  </div>
+</div>
+
+<p><strong>Alliez élégance intemporelle et précision horlogère à votre poignet.</strong> Conçue avec des finitions de premier choix, cette montre sublime votre allure aussi bien en tenue d'affaires que pour vos sorties du week-end. Chaque composant a été sélectionné pour offrir une durabilité sans compromis et un raffinement d'exception.</p>
+
+<div class="desc-slider-container">
+  <div class="desc-slider-header">
+    <span class="desc-slider-title">📸 Galerie photos sous tous les angles</span>
+    <span class="desc-slider-hint">Faites défiler ◄ gauche / droite ►</span>
+  </div>
+  <div class="desc-slider-track">
+    <div class="desc-slider-item">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&q=80" alt="Cadran principal" />
+      <div class="desc-slider-caption">Cadran principal</div>
+    </div>
+    <div class="desc-slider-item">
+      <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=700&q=80" alt="Aiguilles & boîtier" />
+      <div class="desc-slider-caption">Aiguilles & boîtier</div>
+    </div>
+    <div class="desc-slider-item">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&q=80" alt="Bracelet cuir" />
+      <div class="desc-slider-caption">Bracelet cuir</div>
+    </div>
+    <div class="desc-slider-item">
+      <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=700&q=80" alt="Écrin de luxe" />
+      <div class="desc-slider-caption">Écrin de luxe</div>
+    </div>
+  </div>
+</div>
+
+<div class="desc-feature-block">
+  <div class="desc-feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=700&q=80" alt="Cadran haute clarté" />
+  </div>
+  <div class="desc-feature-content">
+    <span class="desc-feature-badge">CADRAN & VERRE RENFORCÉ</span>
+    <h3 class="desc-feature-title">Cadran 42 mm & Verre Minéral Durci Anti-Rayures</h3>
+    <p class="desc-feature-text">Un cadran épuré ultra-lisible protégé par un verre minéral haute résistance traité contre les micro-rayures quotidiennes et les reflets du soleil.</p>
+    <ul class="desc-feature-list">
+      <li><strong>Cristal minéral durci :</strong> Protection supérieure contre les frottements</li>
+      <li><strong>Aiguilles biseautées :</strong> Lisibilité instantanée de l'heure</li>
+      <li><strong>Index luminescents :</strong> Visibilité claire même dans l'obscurité</li>
+    </ul>
+  </div>
+</div>
+
+<div class="desc-feature-block reverse">
+  <div class="desc-feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&q=80" alt="Mouvement quartz de précision" />
+  </div>
+  <div class="desc-feature-content">
+    <span class="desc-feature-badge">HORLOGERIE JAPONAISE</span>
+    <h3 class="desc-feature-title">Mouvement Quartz Japonais & Autonomie 3 Ans</h3>
+    <p class="desc-feature-text">Le cœur de la montre bat grâce à un calibre quartz japonais réputé pour sa précision millimétrique et son silence de fonctionnement absolu.</p>
+    <ul class="desc-feature-list">
+      <li><strong>Précision certifiée :</strong> Dérive inférieure à ±15 secondes par mois</li>
+      <li><strong>Pile longue durée :</strong> Jusqu'à 36 mois d'autonomie sans changement</li>
+      <li><strong>Guichet date discret :</strong> Calendrier automatique intégré à 3 heures</li>
+    </ul>
+  </div>
+</div>
+
+<div class="desc-feature-block">
+  <div class="desc-feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=700&q=80" alt="Bracelet cuir respirant" />
+  </div>
+  <div class="desc-feature-content">
+    <span class="desc-feature-badge">CONFORT AU QUOTIDIEN</span>
+    <h3 class="desc-feature-title">Bracelet en Cuir Véritable Cousu Main</h3>
+    <p class="desc-feature-text">Profitez d'une douceur remarquable au contact de la peau. Le cuir souple s'adapte naturellement à la morphologie de votre poignet sans provoquer de transpiration.</p>
+    <ul class="desc-feature-list">
+      <li><strong>Cuir véritable souple :</strong> Finition lisse et respirante</li>
+      <li><strong>Surpiqûres sellier :</strong> Coutures doublées pour une longévité maximale</li>
+      <li><strong>Boucle ardillon inox :</strong> Fermeture sûre en acier inoxydable 316L</li>
+    </ul>
+  </div>
+</div>
+
+<div class="desc-feature-block reverse">
+  <div class="desc-feature-img-wrap">
+    <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=700&q=80" alt="Étanchéité et écrin" />
+  </div>
+  <div class="desc-feature-content">
+    <span class="desc-feature-badge">RÉSISTANCE & ÉCRIN CADEAU</span>
+    <h3 class="desc-feature-title">Étanchéité 3 ATM (30 Mètres) & Coffret Inclus</h3>
+    <p class="desc-feature-text">Résiste aux éclaboussures d'eau, au lavage des mains et aux averses soudaines. Livrée prête à offrir dans un sublime écrin de protection magnétique.</p>
+    <ul class="desc-feature-list">
+      <li><strong>Étanchéité 3 ATM :</strong> Joint torique haute étanchéité testé en atelier</li>
+      <li><strong>Écrin cadeau offert :</strong> Boîte rigide protectrice avec coussin velours</li>
+      <li><strong>Prêt à porter :</strong> Pile pré-installée avec languette de sécurité</li>
+    </ul>
+  </div>
+</div>
+
+<div class="desc-specs-card">
+  <div class="desc-specs-header">⚙️ Fiche Technique & Spécifications</div>
+  <table class="desc-specs-table">
+    <tr><td class="spec-name">Diamètre du cadran</td><td class="spec-val">42 mm (Taille universelle homme)</td></tr>
+    <tr><td class="spec-name">Épaisseur du boîtier</td><td class="spec-val">10.5 mm (Profil mince ergonomique)</td></tr>
+    <tr><td class="spec-name">Matière du boîtier</td><td class="spec-val">Acier inoxydable poli sous vide</td></tr>
+    <tr><td class="spec-name">Type de verre</td><td class="spec-val">Minéral trempé Hardlex anti-rayures</td></tr>
+    <tr><td class="spec-name">Mouvement</td><td class="spec-val">Quartz japonais haute précision</td></tr>
+    <tr><td class="spec-name">Matière du bracelet</td><td class="spec-val">Cuir véritable sélectionné</td></tr>
+    <tr><td class="spec-name">Largeur du bracelet</td><td class="spec-val">20 mm ajustable (poignets de 16 à 23 cm)</td></tr>
+    <tr><td class="spec-name">Étanchéité</td><td class="spec-val">30 mètres (3 ATM) résistant pluie et éclaboussures</td></tr>
+  </table>
+</div>
+
+<div class="desc-trust-grid">
+  <div class="desc-trust-box"><span class="desc-trust-icon">🚚</span><div class="desc-trust-title">Livraison Rapide</div><div class="desc-trust-desc">Expédition sous 24-48h avec suivi de commande</div></div>
+  <div class="desc-trust-box"><span class="desc-trust-icon">💵</span><div class="desc-trust-title">Paiement à la Livraison</div><div class="desc-trust-desc">Payez en espèces ou Mobile Money dès réception</div></div>
+  <div class="desc-trust-box"><span class="desc-trust-icon">🛡️</span><div class="desc-trust-title">Garantie 2 Ans</div><div class="desc-trust-desc">Remplacement à neuf en cas de défaut de fabrication</div></div>
+</div>`,
+        storySubheadline: 'Mouvement à Quartz Haute Précision & Étanchéité 3 ATM',
+        storyParagraph2: "Conçue pour durer, elle intègre un mécanisme à quartz fiable garantissant une ponctualité exemplaire et une résistance aux éclaboussures du quotidien.",
+        storyBanner: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80'
+      },
+      p2: {
+        id: 'p2',
+        title: 'Bazin Riche Getzner Brodé Artisanal',
+        category: 'Mode & Wax',
+        price: 45000,
+        comparePrice: 50000,
+        images: [
+          'https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: 'La Noblesse du Bazin Riche : Brillance Exceptionnelle et Broderies Royales',
+        storyParagraph1: "Tissu Bazin Riche Getzner de premier choix, réputé pour sa tenue impeccable, sa brillance durable et sa douceur. Réalisé avec des broderies artisanales d'une finesse incomparable.",
+        storySubheadline: 'Le Choix d’Excellence pour les Grandes Occasions',
+        storyParagraph2: "Faites sensation lors de vos cérémonies, mariages et fêtes avec un vêtement prestigieux qui reflète le sommet de l'élégance africaine.",
+        storyBanner: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=1200&q=80'
+      },
+      p3: {
+        id: 'p3',
+        title: 'Robe Kaftan Wax Élégance Moderne',
+        category: 'Mode & Wax',
+        price: 22500,
+        comparePrice: 28000,
+        images: [
+          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: 'Robe Kaftan Fluide en Véritable Wax Africain de Haute Qualité',
+        storyParagraph1: "Coupe aérienne et flatteuse, motifs vivants et finitions impeccables. Un vêtement polyvalent pour briller en toute occasion.",
+        storySubheadline: 'Confort et Style Réunis',
+        storyParagraph2: "Tissu respirant et léger garantissant un confort optimal même par temps chaud.",
+        storyBanner: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80'
+      },
+      p4: {
+        id: 'p4',
+        title: 'Sandales Cuir Touareg Artisanales',
+        category: 'Chaussures',
+        price: 18000,
+        comparePrice: 22000,
+        images: [
+          'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: 'Cuir Naturel Cousu Main : L’Artisanat Traditionnel du Sahel',
+        storyParagraph1: "Sandales légères et ultra-confortables conçues à la main par des maîtres maroquiniers.",
+        storySubheadline: 'Semelle Renforcée & Confort Absolu',
+        storyParagraph2: "S'adapte naturellement à la morphologie du pied pour des journées entières de marche sans fatigue.",
+        storyBanner: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80'
+      },
+      p5: {
+        id: 'p5',
+        title: 'Sac à Main Cuir du Sahel Finitions Dorées',
+        category: 'Accessoires',
+        price: 32000,
+        comparePrice: 38000,
+        images: [
+          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80'
+        ],
+        storyHeadline: 'Maroquinerie de Luxe : Le Sac Idéal pour Sublimer Votre Quotidien',
+        storyParagraph1: "Grand compartiment intérieur, doublure renforcée et bandoulière amovible. Un accessoire indispensable.",
+        storySubheadline: 'Finitions Haut de Gamme',
+        storyParagraph2: "Bouclerie dorée inoxydable et coutures sellier renforcées.",
+        storyBanner: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=80'
+      }
+    };
+
+    // Current State
+    let currentProduct = productCatalog.p0;
+    let currentImageIndex = 0;
+    let currentQuantity = 1;
+
+    // Load from URL query string or localStorage
+    function initProductPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('id') || 'p0';
+
+      // Check custom products from localStorage
+      const savedProducts = localStorage.getItem('sakbi_products_data');
+      if (savedProducts) {
+        try {
+          const list = JSON.parse(savedProducts);
+          const found = list.find(p => p.id === prodId);
+          if (found) {
+            currentProduct = {
+              id: found.id,
+              title: found.name,
+              category: found.cat || 'Articles',
+              price: Number(found.price) || 10000,
+              comparePrice: Number(found.compare) || (Number(found.price) * 1.3),
+              images: found.images && found.images.length ? found.images : (productCatalog[prodId]?.images || productCatalog.p0.images),
+              storyHeadline: found.name,
+              storyParagraph1: found.desc || productCatalog.p0.storyParagraph1,
+              storySubheadline: 'Qualité Supérieure & Satisfaction Garantie',
+              storyParagraph2: 'Commandez en toute confiance avec notre service client réactif et la livraison rapide.',
+              storyBanner: found.images && found.images[0] ? found.images[0] : productCatalog.p0.storyBanner
+            };
+          }
+        } catch(e) {}
+      }
+
+      if (!currentProduct || (currentProduct.id !== prodId && productCatalog[prodId])) {
+        currentProduct = productCatalog[prodId] || productCatalog.p0;
+      }
+
+      // Check store brand name
+      const customStore = localStorage.getItem('sakbi_store_name');
+      const storeLogoEl = document.getElementById('store-logo-brand');
+      if (customStore && storeLogoEl) {
+        storeLogoEl.innerHTML = `${customStore}<span class="dot">.</span>`;
+      }
+
+      // Synchronisation du thème personnalisé Sakbi depuis localStorage
+      try {
+        const themeConfigRaw = localStorage.getItem('sakbi_theme_config');
+        if (themeConfigRaw) {
+          const cfg = JSON.parse(themeConfigRaw);
+          if (cfg.primaryColor) {
+            document.documentElement.style.setProperty('--primary-blue', cfg.primaryColor);
+            document.documentElement.style.setProperty('--primary-blue-hover', cfg.primaryColor);
+          }
+          if (cfg.bannerText) {
+            const ann = document.querySelector('.top-announcement-bar');
+            if (ann) ann.textContent = cfg.bannerText;
+          }
+          if (cfg.bannerBg) {
+            const ann = document.querySelector('.top-announcement-bar');
+            if (ann) ann.style.backgroundColor = cfg.bannerBg;
+          }
+          if (cfg.bannerVisible === false) {
+            const ann = document.querySelector('.top-announcement-bar');
+            if (ann) ann.style.display = 'none';
+          }
+          if (cfg.ctaLabel) {
+            const cta = document.getElementById('btn-submit-order');
+            if (cta) cta.textContent = cfg.ctaLabel;
+          }
+          if (cfg.btnShape) {
+            const cta = document.getElementById('btn-submit-order');
+            if (cta) cta.style.borderRadius = cfg.btnShape;
+          }
+        }
+      } catch(e) {}
+
+      renderProductDetails();
+    }
+
+    function renderProductDetails() {
+      document.getElementById('page-title').textContent = `${currentProduct.title} • Commande Express`;
+      document.getElementById('prod-title').textContent = currentProduct.title;
+      document.getElementById('prod-category').textContent = currentProduct.category;
+      document.getElementById('summary-prod-name').textContent = currentProduct.title;
+
+      const priceFormatted = `${Number(currentProduct.price).toLocaleString()} FCFA`;
+      document.getElementById('prod-price-display').textContent = priceFormatted;
+
+      if (currentProduct.comparePrice && currentProduct.comparePrice > currentProduct.price) {
+        document.getElementById('prod-compare-display').textContent = `${Number(currentProduct.comparePrice).toLocaleString()} FCFA`;
+        const percent = Math.round(((currentProduct.comparePrice - currentProduct.price) / currentProduct.comparePrice) * 100);
+        document.getElementById('prod-saving-badge').textContent = `-${percent}% ÉCONOMIE`;
+        document.getElementById('prod-compare-display').style.display = 'inline';
+        document.getElementById('prod-saving-badge').style.display = 'inline';
+      } else {
+        document.getElementById('prod-compare-display').style.display = 'none';
+        document.getElementById('prod-saving-badge').style.display = 'none';
+      }
+
+      // Story
+      const storyHeadlineEl = document.getElementById('story-headline');
+      const storyP1El = document.getElementById('story-paragraph-1');
+      const storySubheadEl = document.getElementById('story-subheadline');
+      const storyP2El = document.getElementById('story-paragraph-2');
+      const storyBannerEl = document.getElementById('story-banner-image');
+
+      const hasHtmlTags = currentProduct.storyParagraph1 && (currentProduct.storyParagraph1.includes('<div') || currentProduct.storyParagraph1.includes('<h2') || currentProduct.storyParagraph1.includes('<p') || currentProduct.storyParagraph1.includes('<!--'));
+      if (hasHtmlTags) {
+        if (storyHeadlineEl) storyHeadlineEl.style.display = 'none';
+        if (storyP1El) {
+          storyP1El.innerHTML = currentProduct.storyParagraph1;
+          storyP1El.style.display = 'block';
+        }
+        if (storySubheadEl) storySubheadEl.style.display = 'none';
+        if (storyP2El) storyP2El.style.display = 'none';
+        if (storyBannerEl) storyBannerEl.style.display = 'none';
+      } else {
+        if (storyHeadlineEl) {
+          storyHeadlineEl.style.display = 'block';
+          storyHeadlineEl.textContent = currentProduct.storyHeadline || currentProduct.title;
+        }
+        if (storyP1El) {
+          storyP1El.textContent = currentProduct.storyParagraph1 || '';
+          storyP1El.style.display = 'block';
+        }
+        if (storySubheadEl) {
+          storySubheadEl.style.display = 'block';
+          storySubheadEl.textContent = currentProduct.storySubheadline || 'Cadran Rotatif Unique au Design Révolutionnaire';
+        }
+        if (storyP2El) {
+          storyP2El.style.display = 'block';
+          storyP2El.textContent = currentProduct.storyParagraph2 || '';
+        }
+        if (storyBannerEl) {
+          storyBannerEl.style.display = 'block';
+          storyBannerEl.src = currentProduct.storyBanner || (currentProduct.images && currentProduct.images[0]) || '/images/watch_langlishi.png';
+        }
+      }
+
+      // Gallery
+      renderGallery();
+      updateSummary();
+    }
+
+    function renderGallery() {
+      const container = document.getElementById('gallery-thumbs-container');
+      container.innerHTML = '';
+
+      if (!currentProduct.images || currentProduct.images.length === 0) {
+        currentProduct.images = [productCatalog.p0.images[0]];
+      }
+
+      currentProduct.images.forEach((url, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = `thumb-item ${idx === currentImageIndex ? 'active' : ''}`;
+        thumb.onclick = () => selectGalleryImage(idx);
+        thumb.innerHTML = `<img src="${url}" alt="Miniature ${idx + 1}" />`;
+        container.appendChild(thumb);
+      });
+
+      selectGalleryImage(0);
+    }
+
+    function selectGalleryImage(idx) {
+      if (idx < 0) idx = currentProduct.images.length - 1;
+      if (idx >= currentProduct.images.length) idx = 0;
+      currentImageIndex = idx;
+
+      const activeImg = document.getElementById('gallery-active-image');
+      activeImg.src = currentProduct.images[idx];
+
+      document.getElementById('gallery-counter').textContent = `${idx + 1} / ${currentProduct.images.length}`;
+
+      const thumbs = document.querySelectorAll('.thumb-item');
+      thumbs.forEach((t, i) => {
+        if (i === idx) t.classList.add('active');
+        else t.classList.remove('active');
+      });
+    }
+
+    function navigateGallery(step) {
+      selectGalleryImage(currentImageIndex + step);
+    }
+
+    function adjustQuantity(delta) {
+      const input = document.getElementById('order-qty-input');
+      let val = parseInt(input.value) || 1;
+      val += delta;
+      if (val < 1) val = 1;
+      if (val > 99) val = 99;
+      input.value = val;
+      currentQuantity = val;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const input = document.getElementById('order-qty-input');
+      let val = parseInt(input.value) || 1;
+      if (val < 1) val = 1;
+      currentQuantity = val;
+
+      const total = currentQuantity * currentProduct.price;
+      const totalStr = `${Number(total).toLocaleString()} FCFA`;
+
+      document.getElementById('summary-qty-price').textContent = `${currentQuantity} × ${Number(currentProduct.price).toLocaleString()} FCFA`;
+      document.getElementById('summary-total-amount').textContent = totalStr;
+      document.getElementById('mobile-bar-price').textContent = totalStr;
+      document.getElementById('nav-cart-count').textContent = currentQuantity;
+    }
+
+    // Supabase Cloud Integration
+    const SAKBI_SUPABASE_URL = 'https://jcvpeyzetqgahoyryxhl.supabase.co';
+    const SAKBI_SUPABASE_ANON_KEY = 'sb_publishable_2kl0_LWNR1AFn-ozn-t8Hg_6VaZT4Df';
+    let supabaseClient = null;
+    try {
+      if (window.supabase && window.supabase.createClient) {
+        supabaseClient = window.supabase.createClient(SAKBI_SUPABASE_URL, SAKBI_SUPABASE_ANON_KEY);
+      }
+    } catch(e) {
+      console.warn('Supabase client error:', e);
+    }
+
+    async function handleOrderSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('client-name').value.trim();
+      const phone = document.getElementById('client-phone').value.trim();
+      const city = document.getElementById('client-city').value.trim();
+      const notes = document.getElementById('client-notes').value.trim();
+
+      if (!name || !phone || !city) {
+        alert('Veuillez remplir votre nom, numéro de téléphone et ville.');
+        return;
+      }
+
+      const total = currentQuantity * currentProduct.price;
+      const orderNum = `${Math.floor(1000 + Math.random() * 9000)}`;
+      const orderId = `CMD-#${orderNum}`;
+      const orderDateStr = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      // Enregistrement direct dans la base Supabase Cloud
+      if (supabaseClient) {
+        try {
+          supabaseClient.from('orders').insert([{
+            order_number: `#${orderNum}`,
+            customer_name: name,
+            customer_phone: phone,
+            customer_city: city,
+            customer_address: notes || '',
+            total_amount: total,
+            currency: 'XOF',
+            status: 'pending',
+            payment_method: 'cash_on_delivery',
+            payment_status: 'pending'
+          }]).then(({ error }) => {
+            if (error) console.warn('Supabase order insert:', error);
+          });
+        } catch(err) {
+          console.warn('Supabase order exception:', err);
+        }
+      }
+
+      // Save order details for standalone confirmation page (Images 2 & 3)
+      const orderData = {
+        id: orderNum,
+        fullDate: orderDateStr,
+        product: currentProduct.title,
+        qty: currentQuantity,
+        price: currentProduct.price,
+        total: total,
+        customer: name,
+        phone: phone,
+        city: city,
+        notes: notes,
+        statusTraitement: 'Pending',
+        statusPaiement: 'Unpaid'
+      };
+      try {
+        localStorage.setItem('sakbi_latest_order', JSON.stringify(orderData));
+      } catch(e) {}
+
+      // Save order to localStorage for dashboard integration
+      try {
+        const existingOrders = JSON.parse(localStorage.getItem('sakbi_live_orders') || '[]');
+        existingOrders.unshift({
+          id: orderId,
+          customer: name,
+          phone: phone,
+          city: city,
+          notes: notes,
+          product: currentProduct.title,
+          qty: currentQuantity,
+          total: total,
+          status: 'En attente',
+          date: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        });
+        localStorage.setItem('sakbi_live_orders', JSON.stringify(existingOrders));
+      } catch(err) {}
+
+      // Redirection immédiate vers la page de confirmation dédiée (Images 2 & 3)
+      window.location.href = `./confirmation.html?order=${orderNum}`;
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('order-success-modal').classList.remove('open');
+      document.getElementById('commande-form').reset();
+      currentQuantity = 1;
+      document.getElementById('order-qty-input').value = 1;
+      updateSummary();
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initProductPage);
+  </script>
+</body>
+</html>

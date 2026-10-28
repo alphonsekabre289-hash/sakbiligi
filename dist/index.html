@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logicom • Gérez, personnalisez et publiez votre site en 3 minutes</title>
+  <meta name="description" content="Lance ta boutique e-commerce en moins de 5 minutes. Sans carte à l'inscription. Adapté aux paiements en FCFA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/main-CSYJZ48Q.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DdjyqMrA.css">
+</head>
+<body>
+  <!-- Ambient background glow -->
+  <div class="glow-bg"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" title="Logicom" style="display:inline-flex;align-items:center;text-decoration:none;">
+        <img src="/logicom-logo.svg" alt="Logicom" style="height:36px;width:auto;display:block;" />
+      </a>
+
+      <nav class="nav-links">
+        <a href="#fonctionnalites" class="nav-link" data-i18n="nav_features">Fonctionnalités</a>
+        <a href="#tarifs" class="nav-link" data-i18n="nav_pricing">Tarifs</a>
+        <a href="#blog" class="nav-link" data-i18n="nav_blog">Blog</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="lang-selector-wrapper" id="lang-selector-wrapper">
+          <button class="lang-selector-btn" id="lang-toggle-btn" type="button" aria-expanded="false" aria-haspopup="true" title="Changer de langue">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="current-lang-code" id="current-lang-code">FR</span>
+            <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <div class="lang-dropdown-menu" id="lang-dropdown-menu" role="menu">
+            <div class="lang-dropdown-title" data-i18n="lang_menu_title">Choisir une langue</div>
+            <button class="lang-dropdown-item active" data-lang="fr" type="button" role="menuitem">
+              <span class="lang-item-flag">🇫🇷</span>
+              <span class="lang-item-name">Français</span>
+              <span class="lang-item-code">FR</span>
+              <svg class="lang-item-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <button class="lang-dropdown-item" data-lang="en" type="button" role="menuitem">
+              <span class="lang-item-flag">🇬🇧</span>
+              <span class="lang-item-name">English</span>
+              <span class="lang-item-code">EN</span>
+              <svg class="lang-item-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <button class="lang-dropdown-item" data-lang="de" type="button" role="menuitem">
+              <span class="lang-item-flag">🇩🇪</span>
+              <span class="lang-item-name">Deutsch</span>
+              <span class="lang-item-code">DE</span>
+              <svg class="lang-item-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <button class="lang-dropdown-item" data-lang="es" type="button" role="menuitem">
+              <span class="lang-item-flag">🇪🇸</span>
+              <span class="lang-item-name">Español</span>
+              <span class="lang-item-code">ES</span>
+              <svg class="lang-item-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <button class="lang-dropdown-item" data-lang="ar" type="button" role="menuitem">
+              <span class="lang-item-flag">🇸🇦</span>
+              <span class="lang-item-name">العربية</span>
+              <span class="lang-item-code">AR</span>
+              <svg class="lang-item-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <a href="./login.html" class="btn-text" id="btn-login" data-i18n="nav_login">Se connecter</a>
+        <a href="./login.html" class="btn-primary" id="btn-start">
+          <span data-i18n="nav_start">S'inscrire</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <!-- Left Content -->
+      <div class="hero-text-col">
+        <div class="section-tag">
+          <span class="tag-bullet"></span>
+          <span data-i18n="hero_tag">BOUTIQUE EN LIGNE</span>
+        </div>
+
+        <h1 class="hero-headline">
+          <span data-i18n="hero_title_1">Gérez, personnalisez</span><br />
+          <span class="text-secondary" data-i18n="hero_title_2">et publiez votre site</span><br />
+          <span class="hero-brand-highlight" data-i18n="hero_title_3">en 3 minutes avec Logicom.</span>
+        </h1>
+
+
+        <div class="hero-cta-group">
+          <a href="./login.html" class="btn-primary btn-large" id="btn-signup-hero">
+            <span data-i18n="hero_btn_signup">S'inscrire & Créer ma boutique</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+          <a href="./dashboard.html?demo=true" class="btn-link" id="btn-have-account" style="display:inline-flex;align-items:center;gap:0.4rem;font-weight:600;">
+            <span data-i18n="hero_btn_dashboard">Accéder au Tableau de bord ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Mockup Card -->
+      <div class="hero-mockup-col">
+        <div class="dashboard-mockup-wrapper">
+          <!-- Live badge -->
+          <div class="live-badge">
+            <span class="pulse-dot"></span>
+            <div class="live-badge-content">
+              <span class="live-label" data-i18n="mockup_live">LIVE</span>
+              <strong class="live-amount">+FCFA 142K</strong>
+              <span class="live-period" data-i18n="mockup_today">TODAY</span>
+            </div>
+          </div>
+
+          <!-- Main App Window -->
+          <div class="app-card">
+            <div class="window-header">
+              <div class="window-dots">
+                <span class="dot-win red"></span>
+                <span class="dot-win yellow"></span>
+                <span class="dot-win green"></span>
+              </div>
+              <div class="window-url">APP.LOGICOM.IO</div>
+              <div class="window-spacer"></div>
+            </div>
+
+            <div class="app-card-body">
+              <div class="revenue-row">
+                <div>
+                  <div class="metric-eyebrow" data-i18n="mockup_revenue_30d">REVENU • 30J</div>
+                  <div class="metric-big-value" id="revenue-val">FCFA 2.4M</div>
+                </div>
+                <div class="growth-badge">+18.2%</div>
+              </div>
+
+              <!-- Interactive Sparkline Chart -->
+              <div class="chart-container">
+                <svg viewBox="0 0 400 140" class="sparkline-svg" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25" />
+                      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Filled Area -->
+                  <path d="M 0,105 Q 40,95 80,100 T 160,85 T 240,70 T 320,55 T 385,25 L 385,140 L 0,140 Z" fill="url(#chartGradient)"></path>
+                  <!-- Line -->
+                  <path d="M 0,105 Q 40,95 80,100 T 160,85 T 240,70 T 320,55 T 385,25" fill="none" stroke="#2e6930" stroke-width="3" stroke-linecap="round"></path>
+                  <!-- Highlight Peak Point -->
+                  <circle cx="385" cy="25" r="5" fill="#22c55e" stroke="#ffffff" stroke-width="2.5"></circle>
+                </svg>
+              </div>
+
+              <!-- Three Bottom Stats -->
+              <div class="stats-triad">
+                <div class="stat-pill">
+                  <div class="stat-name" data-i18n="mockup_orders">COMMANDES</div>
+                  <div class="stat-value" id="orders-val">186</div>
+                </div>
+                <div class="stat-pill">
+                  <div class="stat-name" data-i18n="mockup_visits">VISITES</div>
+                  <div class="stat-value" id="visits-val">4.2K</div>
+                </div>
+                <div class="stat-pill">
+                  <div class="stat-name" data-i18n="mockup_conversion">CONVERSION</div>
+                  <div class="stat-value" id="conversion-val">4.4%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Notification Order Pill -->
+          <div class="order-notification-pill" id="order-pill">
+            <span class="order-tag" data-i18n="mockup_new_order">NOUVELLE COMMANDE</span>
+            <span class="order-detail"><strong id="order-customer">Aminata</strong> • FCFA <span id="order-price">18 500</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Fonctionnalités -->
+  <section class="features-section" id="fonctionnalites">
+    <div class="features-container">
+      <div class="section-header">
+        <div class="section-tag">
+          <span class="tag-bullet"></span>
+          <span data-i18n="features_tag">FONCTIONNALITÉS</span>
+        </div>
+        <h2 class="section-headline" data-i18n="features_heading">Tout ce qu'il faut pour vendre en ligne.</h2>
+        <p class="section-subtitle" data-i18n="features_subtitle">
+          Un outil pensé pour les entrepreneurs en ligne. Rien de superflu, tout l'essentiel.
+        </p>
+      </div>
+
+      <!-- 6 Features Grid (2 Rows x 3 Columns) -->
+      <div class="features-grid">
+        <!-- Card 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_1_title">Boutique en ligne</h3>
+          <p class="feature-text" data-i18n="feat_1_text">
+            Site auto-généré avec ton sous-domaine <strong>mystore.logicom.io</strong>. Personnalisable en quelques clics.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_2_title">Commandes simplifiées</h3>
+          <p class="feature-text" data-i18n="feat_2_text">
+            Statuts visuels, kanban — gère tes commandes sans stress.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_3_title">Analytics temps réel</h3>
+          <p class="feature-text" data-i18n="feat_3_text">
+            Revenu, visites, conversion, sources de trafic — tout ce qu'il faut pour grandir.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_4_title">Livraison intégrée</h3>
+          <p class="feature-text" data-i18n="feat_4_text">
+            Assigne tes livreurs, suis chaque colis. Un statut clair pour chaque client.
+          </p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_5_title">Équipe et rôles</h3>
+          <p class="feature-text" data-i18n="feat_5_text">
+            Propriétaire, admin, staff, livreur — accès séparés. Travaille à plusieurs sans risque.
+          </p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="9" y1="10" x2="15" y2="10"></line>
+              <line x1="9" y1="14" x2="15" y2="14"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="feat_6_title">Paiements en FCFA</h3>
+          <p class="feature-text" data-i18n="feat_6_text">
+            Prix et paiements adaptés aux marchés qui utilisent le FCFA.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Modal: Créer ma boutique Logicom -->
+  <div class="modal-overlay" id="store-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-x">&times;</button>
+      <div class="modal-header">
+        <div class="modal-badge" data-i18n="modal_badge">🚀 Lancement Express</div>
+        <h3 class="modal-heading" data-i18n="modal_heading">Créez votre boutique Logicom</h3>
+        <p class="modal-sub" data-i18n="modal_sub">Prête en moins de 2 minutes. Sans carte bancaire.</p>
+      </div>
+
+      <form id="store-form" class="modal-form">
+        <div class="form-item">
+          <label for="store-name" data-i18n="modal_lbl_name">Nom de votre boutique</label>
+          <div class="input-prefix-wrap">
+            <input type="text" id="store-name" placeholder="ex: chic-mode, dakar-shop" data-i18n-ph="modal_ph_name" required />
+            <span class="input-suffix">.logicom.io</span>
+          </div>
+        </div>
+
+        <div class="form-item">
+          <label for="store-category" data-i18n="modal_lbl_category">Catégorie principale</label>
+          <select id="store-category">
+            <option value="mode" data-i18n="cat_fashion">Mode & Vêtements</option>
+            <option value="beaute" data-i18n="cat_beauty">Beauté & Cosmétiques</option>
+            <option value="tech" data-i18n="cat_tech">Électronique & Téléphonie</option>
+            <option value="alimentaire" data-i18n="cat_food">Épicerie & Alimentation</option>
+            <option value="autre" data-i18n="cat_other">Autre secteur</option>
+          </select>
+        </div>
+
+        <div class="form-item">
+          <label for="store-currency" data-i18n="modal_lbl_currency">Devise par défaut</label>
+          <input type="text" id="store-currency" value="FCFA (XOF / XAF)" readonly />
+        </div>
+
+        <button type="submit" class="btn-primary btn-full">
+          <span data-i18n="modal_btn_submit">Générer ma boutique gratuitement ↗</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-shelf" id="toast-shelf"></div>
+
+</body>
+</html>
